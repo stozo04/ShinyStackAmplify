@@ -19,6 +19,8 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
+    "resolveJsonModule": true, // NOTE: Used for Amplify to read json file in app.module.ts
+    "esModuleInterop": true, // NOTE: Used for Amplify to read json file in app.module.ts
     "lib": [
       "ES2022",
       "dom"

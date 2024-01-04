@@ -10,6 +10,11 @@
       "StackName": "amplify-shinystacks-dev-125005",
       "StackId": "arn:aws:cloudformation:us-west-2:506081150408:stack/amplify-shinystacks-dev-125005/13dd78a0-ab32-11ee-9d44-0ad698417807",
       "AmplifyAppId": "d289yrp0zqakzl"
+    },
+    "categories": {
+      "auth": {
+        "shinystacks23b887fd": {}
+      }
     }
   }
 }

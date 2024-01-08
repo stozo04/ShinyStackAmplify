@@ -9,11 +9,21 @@
       "UnauthRoleName": "amplify-shinystacks-dev-125005-unauthRole",
       "StackName": "amplify-shinystacks-dev-125005",
       "StackId": "arn:aws:cloudformation:us-west-2:506081150408:stack/amplify-shinystacks-dev-125005/13dd78a0-ab32-11ee-9d44-0ad698417807",
-      "AmplifyAppId": "d289yrp0zqakzl"
+      "AmplifyAppId": "d289yrp0zqakzl",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-shinystacks-dev-125005-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "auth": {
         "shinystacks23b887fd": {}
+      },
+      "function": {
+        "itemsLambda": {
+          "deploymentBucketName": "amplify-shinystacks-dev-125005-deployment",
+          "s3Key": "amplify-builds/itemsLambda-37636273683141764c4b-build.zip"
+        }
+      },
+      "api": {
+        "itemsApi": {}
       }
     }
   }

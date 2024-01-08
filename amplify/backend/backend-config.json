@@ -83,6 +83,11 @@
     }
   },
   "storage": {
+    "productsStorage": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    },
     "productsTable": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"

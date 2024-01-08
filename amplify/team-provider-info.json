@@ -26,7 +26,8 @@
         "productsApi": {}
       },
       "storage": {
-        "productsTable": {}
+        "productsTable": {},
+        "productsStorage": {}
       }
     }
   }

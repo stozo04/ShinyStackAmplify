@@ -25,8 +25,15 @@
   ],
   "aws_cloud_logic_custom": [
     {
-      "name": "itemsApi",
-      "endpoint": "https://0ib33qf3q1.execute-api.us-west-2.amazonaws.com/dev",
+      "name": "productsApi",
+      "endpoint": "https://elbbhm28mc.execute-api.us-west-2.amazonaws.com/dev",
+      "region": "us-west-2"
+    }
+  ],
+  "aws_dynamodb_all_tables_region": "us-west-2",
+  "aws_dynamodb_table_schemas": [
+    {
+      "tableName": "productsTable-dev",
       "region": "us-west-2"
     }
   ]

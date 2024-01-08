@@ -1,6 +1,6 @@
 {
   "api": {
-    "itemsApi": {
+    "productsApi": {
       "dependsOn": [
         {
           "attributes": [
@@ -8,7 +8,7 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "itemsLambda"
+          "resourceName": "productsLambda"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -44,28 +44,48 @@
     }
   },
   "function": {
-    "itemsLambda": {
+    "productsLambda": {
       "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "productsTable"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
   "parameters": {
-    "AMPLIFY_function_itemsLambda_deploymentBucketName": {
+    "AMPLIFY_function_productsLambda_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "itemsLambda"
+          "resourceName": "productsLambda"
         }
       ]
     },
-    "AMPLIFY_function_itemsLambda_s3Key": {
+    "AMPLIFY_function_productsLambda_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "itemsLambda"
+          "resourceName": "productsLambda"
         }
       ]
+    }
+  },
+  "storage": {
+    "productsTable": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
     }
   }
 }

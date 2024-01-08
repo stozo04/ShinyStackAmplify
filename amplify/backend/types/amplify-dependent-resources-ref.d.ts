@@ -1,6 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
   "api": {
-    "itemsApi": {
+    "productsApi": {
       "ApiId": "string",
       "ApiName": "string",
       "RootUrl": "string"
@@ -18,12 +18,22 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
-    "itemsLambda": {
+    "productsLambda": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
       "Name": "string",
       "Region": "string"
+    }
+  },
+  "storage": {
+    "productsTable": {
+      "Arn": "string",
+      "Name": "string",
+      "PartitionKeyName": "string",
+      "PartitionKeyType": "string",
+      "Region": "string",
+      "StreamArn": "string"
     }
   }
 }

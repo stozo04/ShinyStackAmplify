@@ -17,13 +17,16 @@
         "shinystacks23b887fd": {}
       },
       "function": {
-        "itemsLambda": {
+        "productsLambda": {
           "deploymentBucketName": "amplify-shinystacks-dev-125005-deployment",
-          "s3Key": "amplify-builds/itemsLambda-37636273683141764c4b-build.zip"
+          "s3Key": "amplify-builds/productsLambda-534e667344316b55456a-build.zip"
         }
       },
       "api": {
-        "itemsApi": {}
+        "productsApi": {}
+      },
+      "storage": {
+        "productsTable": {}
       }
     }
   }

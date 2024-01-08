@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { get, post } from 'aws-amplify/api';
+import { get, post, put } from 'aws-amplify/api';
 
 @Component({
   selector: 'app-root',
@@ -11,13 +11,17 @@ export class AppComponent implements OnInit {
   async ngOnInit() {
     // POST
     // try {
+    //   const todo = {
+    //     id: '1',
+    //     name: '2019 American Silver Eagle',
+    //     description: 'This is my description of my very first product!',
+    //     price: 89.99
+    //   };
     //   const restOperation = post({
-    //     apiName: 'itemsApi',
-    //     path: '/items',
+    //     apiName: 'productsApi',
+    //     path: '/products',
     //     options: {
-    //       body: {
-    //         message: 'Mow the lawn'
-    //       }
+    //       body: todo
     //     }
     //   });
     //   await restOperation.response;
@@ -31,8 +35,8 @@ export class AppComponent implements OnInit {
     // GET
     try {
       const restOperation = get({
-        apiName: 'itemsApi',
-        path: '/items'
+        apiName: 'productsApi',
+        path: '/products'
       });
       const { body } = await restOperation.response;
       // consume as a string:
@@ -48,5 +52,21 @@ export class AppComponent implements OnInit {
     } catch (error) {
       console.log('GET call failed: ', error);
     }
+
+    // PUT
+    //   try {
+    //     const todo = { name: 'My first todo', message: 'Hello world!' };
+    //     const restOperation = put({
+    //       apiName: 'itemsApi',
+    //       path: 'items/2',
+    //       options: {
+    //         body: todo
+    //       }
+    //     });
+    //     const response = await restOperation.response;
+    //     console.log('PUT call succeeded: ', response);
+    //   } catch (err) {
+    //     console.log('PUT call failed: ', err);
+    //   }
   }
 }

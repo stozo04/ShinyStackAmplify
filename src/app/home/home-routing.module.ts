@@ -73,10 +73,6 @@ const routes: Routes = [
   {
     path: 'bags',
     component: BagsComponent
-  },
-  {
-    path: 'marijuana',
-    component: MarijuanaComponent
   }
 ];
 

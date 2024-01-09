@@ -1,20 +1,10 @@
 <div class="main-navbar">
   <div id="mainnav">
-    <div class="toggle-nav" (click)="mainMenuToggle()">
-      <i class="fa fa-bars sidebar-bar"></i>
-    </div>
-    <ul class="nav-menu" [class.opennav]="navServices?.mainMenuToggle">
-
-      <li class="back-btn">
-        <div class="mobile-back text-end" (click)="mainMenuToggle()">
-          <span>Back</span>
-          <i class="fa fa-angle-right ps-2" aria-hidden="true"></i>
-        </div>
-      </li>
+    <ul class="nav-menu" >
 
       <li *ngFor="let menuItem of menuItems" [class.mega-menu]="menuItem.megaMenu">
         <!-- Sub -->
-        <a href="javascript:void(0)" class="nav-link" *ngIf="menuItem.type === 'sub'" 
+        <a href="{{ menuItem.path }}" class="nav-link" *ngIf="menuItem.type === 'sub'" 
             (click)="toggletNavActive(menuItem)">
           {{ menuItem.title | translate }}
           <div class="lable-nav" *ngIf="menuItem.badge">{{ menuItem.badgeText | translate }}</div>

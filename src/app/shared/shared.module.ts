@@ -20,7 +20,6 @@ import { HeaderFourComponent } from './header/header-four/header-four.component'
 import { FooterFourComponent } from './footer/footer-four/footer-four.component';
 
 // Components
-import { LeftMenuComponent } from './components/left-menu/left-menu.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { CategoriesComponent } from './components/categories/categories.component';
@@ -64,7 +63,6 @@ import { DiscountPipe } from './pipes/discount.pipe';
     FooterThreeComponent,
     HeaderFourComponent,
     FooterFourComponent,
-    LeftMenuComponent,
     MenuComponent,
     SettingsComponent,
     BreadcrumbComponent,

@@ -20,7 +20,8 @@
         "productsLambda": {
           "deploymentBucketName": "amplify-shinystacks-dev-125005-deployment",
           "s3Key": "amplify-builds/productsLambda-534e667344316b55456a-build.zip"
-        }
+        },
+        "productsTable": {}
       },
       "api": {
         "productsApi": {}
@@ -28,6 +29,38 @@
       "storage": {
         "productsTable": {},
         "productsStorage": {}
+      }
+    }
+  },
+  "develop": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-shinystacks-develop-110247-authRole",
+      "UnauthRoleArn": "arn:aws:iam::506081150408:role/amplify-shinystacks-develop-110247-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::506081150408:role/amplify-shinystacks-develop-110247-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-shinystacks-develop-110247-deployment",
+      "UnauthRoleName": "amplify-shinystacks-develop-110247-unauthRole",
+      "StackName": "amplify-shinystacks-develop-110247",
+      "StackId": "arn:aws:cloudformation:us-west-2:506081150408:stack/amplify-shinystacks-develop-110247/ea301020-af10-11ee-9c47-0a6ca25d6c29",
+      "AmplifyAppId": "d289yrp0zqakzl"
+    },
+    "categories": {
+      "auth": {
+        "shinystacks23b887fd": {}
+      },
+      "function": {
+        "productsLambda": {
+          "deploymentBucketName": "amplify-shinystacks-develop-110247-deployment",
+          "s3Key": "amplify-builds/productsLambda-534e667344316b55456a-build.zip"
+        },
+        "productsTable": {}
+      },
+      "api": {
+        "productsApi": {}
+      },
+      "storage": {
+        "productsStorage": {},
+        "productsTable": {}
       }
     }
   }

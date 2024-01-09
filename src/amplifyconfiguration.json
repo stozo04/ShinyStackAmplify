@@ -1,9 +1,16 @@
 {
   "aws_project_region": "us-west-2",
-  "aws_cognito_identity_pool_id": "us-west-2:21c8d504-3b6c-4a51-8f04-c0552ea4e1c3",
+  "aws_cloud_logic_custom": [
+    {
+      "name": "productsApi",
+      "endpoint": "https://eecrtfimak.execute-api.us-west-2.amazonaws.com/develop",
+      "region": "us-west-2"
+    }
+  ],
+  "aws_cognito_identity_pool_id": "us-west-2:4a5baacb-6d46-4d7f-b626-ac92f283d73d",
   "aws_cognito_region": "us-west-2",
-  "aws_user_pools_id": "us-west-2_lgCCceaUo",
-  "aws_user_pools_web_client_id": "6cuqu2dk4064hhm22ac46uqj89",
+  "aws_user_pools_id": "us-west-2_nVygKz6oD",
+  "aws_user_pools_web_client_id": "1fkhak4bf05go9oa8j3lc4l8si",
   "oauth": {},
   "aws_cognito_username_attributes": [
     "EMAIL"
@@ -23,20 +30,13 @@
   "aws_cognito_verification_mechanisms": [
     "EMAIL"
   ],
-  "aws_cloud_logic_custom": [
-    {
-      "name": "productsApi",
-      "endpoint": "https://elbbhm28mc.execute-api.us-west-2.amazonaws.com/dev",
-      "region": "us-west-2"
-    }
-  ],
+  "aws_user_files_s3_bucket": "myproducts110247-develop",
+  "aws_user_files_s3_bucket_region": "us-west-2",
   "aws_dynamodb_all_tables_region": "us-west-2",
   "aws_dynamodb_table_schemas": [
     {
-      "tableName": "productsTable-dev",
+      "tableName": "productsTable-develop",
       "region": "us-west-2"
     }
-  ],
-  "aws_user_files_s3_bucket": "myproducts125005-dev",
-  "aws_user_files_s3_bucket_region": "us-west-2"
+  ]
 }

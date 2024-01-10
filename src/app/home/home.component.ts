@@ -1,15 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ProductSlider, CollectionSlider } from '../shared/data/slider';
+import { Product } from '../shared/classes/product';
+import { ProductService } from '../shared/services/product.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ProductSlider, CollectionSlider } from '../../shared/data/slider';
-import { Product } from '../../shared/classes/product';
-import { ProductService } from '../../shared/services/product.service';
 
 @Component({
-  selector: 'app-watch',
-  templateUrl: './watch.component.html',
-  styleUrls: ['./watch.component.scss']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.scss'
 })
-export class WatchComponent implements OnInit, OnDestroy {
+
+export class HomeComponent implements OnInit, OnDestroy {
 
   public themeLogo: string = 'assets/images/icon/logo-14.png'; // Change Logo
 

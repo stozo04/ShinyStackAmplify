@@ -18,6 +18,8 @@ import { ElementsComponent } from './elements/elements.component';
 import { Amplify } from 'aws-amplify';
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 import awsconfig from '../aws-exports';
+import { HomeComponent } from './home/home.component';
+import { CollectionComponent } from './home/widgets/collection/collection.component';
 
 Amplify.configure(awsconfig);
 // AoT requires an exported function for factories
@@ -30,7 +32,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     ShopComponent,
     PagesComponent,
-    ElementsComponent
+    ElementsComponent,
+    HomeComponent,
+    CollectionComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CollectionSlider } from '../../../shared/data/slider';
+import { CollectionSlider } from 'src/app/shared/data/slider';
 
 @Component({
   selector: 'app-collection',
@@ -9,14 +9,11 @@ import { CollectionSlider } from '../../../shared/data/slider';
 export class CollectionComponent implements OnInit {
 
   @Input() categories: any[];
-  @Input() category: string;
-  @Input() class: string;
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
-   public CollectionSliderConfig: any = CollectionSlider;
+  public CollectionSliderConfig: any = CollectionSlider;
 
 }

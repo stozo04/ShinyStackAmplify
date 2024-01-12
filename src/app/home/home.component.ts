@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ProductSlider, CollectionSlider } from '../shared/data/slider';
 import { Product } from '../shared/classes/product';
 import { ProductService } from '../shared/services/product.service';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -14,9 +13,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   public themeLogo: string = 'assets/images/icon/logo-14.png'; // Change Logo
   public products: Product[] = [];
   public productCollections: any[] = [];
-
-  public ProductSliderConfig: any = ProductSlider;
-  public CollectionSliderConfig: any = CollectionSlider;
   public active;
 
   constructor(private _sanitizer: DomSanitizer,
@@ -33,72 +29,26 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  public sliders = [{
-    title: 'every time',
-    subTitle: 'mittnalier',
-    image: 'assets/images/slider/9.jpg'
-  }, {
-    title: 'welcome to fashion',
-    subTitle: 'Men Watch',
-    image: 'assets/images/slider/10.jpg'
-  }];
-
-
 
   // Collection
   public categories = [{
     image: 'assets/images/categories/gold.jpg',
     title: 'Gold',
-    text: this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">Bars</a></li><li><a href="#">Coins</a></li><li><a href="#">By Wieght</a>'),
+    url: '/pages/collection'
   }, {
     image: 'assets/images/categories/Silver.jpg',
     title: 'Silver',
-    text: this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">Bars</a></li><li><a href="#">Coins</a></li><li><a href="#">By Wieght</a>'),
+    url: '/products/silver'
   }, {
     image: 'assets/images/categories/copper.jpg',
     title: 'Copper',
-    text: this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">Bars</a></li><li><a href="#">Coins</a></li><li><a href="#">By Wieght</a>'),
+    url: '/products/copper'
   }, {
     image: 'assets/images/categories/Supplies.jpg',
     title: 'Supplies',
-    text: this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">TODO</a></li><li><a href="#">TODO</a></li><li><a href="#">TODO</a>'),
+    url: '/products/supplies'
   }]
 
-  // collection
-  public collections = [{
-    image: 'assets/images/collection/watch/1.jpg',
-    title: 'minimum 10% off',
-    text: 'new watch'
-  }, {
-    image: 'assets/images/collection/watch/2.jpg',
-  }, {
-    image: 'assets/images/collection/watch/3.jpg',
-    title: 'minimum 10% off',
-    text: 'gold watch`'
-  }]
-
-  // Blog
-  public blogs = [{
-    image: 'assets/images/blog/10.jpg',
-    date: '25 January 2018',
-    title: 'Lorem ipsum dolor sit consectetur adipiscing elit,',
-    by: 'John Dio'
-  }, {
-    image: 'assets/images/blog/11.jpg',
-    date: '26 January 2018',
-    title: 'Lorem ipsum dolor sit consectetur adipiscing elit,',
-    by: 'John Dio'
-  }, {
-    image: 'assets/images/blog/12.jpg',
-    date: '27 January 2018',
-    title: 'Lorem ipsum dolor sit consectetur adipiscing elit,',
-    by: 'John Dio'
-  }, {
-    image: 'assets/images/blog/13.jpg',
-    date: '28 January 2018',
-    title: 'Lorem ipsum dolor sit consectetur adipiscing elit,',
-    by: 'John Dio'
-  }]
 
   ngOnInit(): void {
     // Change color for this layout

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LogoSlider } from '../../../shared/data/slider';
 
 @Component({
   selector: 'app-logo',
@@ -7,14 +6,11 @@ import { LogoSlider } from '../../../shared/data/slider';
   styleUrls: ['./logo.component.scss']
 })
 export class LogoComponent implements OnInit {
-  
+
   @Input() logos: any[] = [];
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
-  public LogoSliderConfig: any = LogoSlider;
+  ngOnInit(): void { }
 
 }

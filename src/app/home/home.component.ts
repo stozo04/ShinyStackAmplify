@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public categories = [{
     image: 'assets/images/categories/gold.jpg',
     title: 'Gold',
-    url: '/pages/collection'
+    url: '/products/gold'
   }, {
     image: 'assets/images/categories/Silver.jpg',
     title: 'Silver',

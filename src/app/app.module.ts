@@ -21,6 +21,7 @@ import { CollectionComponent } from './home/widgets/collection/collection.compon
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { faJedi } from '@fortawesome/free-solid-svg-icons';
+import { LoginComponent } from './login/login.component';
 
 
 Amplify.configure(awsconfig);
@@ -34,7 +35,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     PagesComponent,
     HomeComponent,
-    CollectionComponent
+    CollectionComponent,
+    LoginComponent
   ],
   imports: [
     FontAwesomeModule,

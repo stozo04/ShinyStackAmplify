@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { PagesComponent } from './pages/pages.component';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,14 @@ const routes: Routes = [
     path: 'pages',
     component: PagesComponent,
     loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
+  },
+  {
+    path: 'products',
+    loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: '**', // Navigate to Home Page if not found any page

@@ -53,6 +53,11 @@ import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component'
 // Pipes
 import { DiscountPipe } from './pipes/discount.pipe';
 
+// FontAwesome
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+
 @NgModule({
   declarations: [
     HeaderOneComponent,
@@ -87,6 +92,7 @@ import { DiscountPipe } from './pipes/discount.pipe';
     DiscountPipe,
   ],
   imports: [
+    FontAwesomeModule,
     CommonModule,
     RouterModule,
     FormsModule,
@@ -138,4 +144,8 @@ import { DiscountPipe } from './pipes/discount.pipe';
     DiscountPipe,
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+  constructor(private library: FaIconLibrary) {
+    library.addIcons(faUser, faMagnifyingGlass);
+  }
+}

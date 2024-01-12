@@ -36,7 +36,6 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "node_modules/@aws-amplify/ui-angular/theme.css",
-              "node_modules/font-awesome/scss/font-awesome.scss",
               "src/assets/scss/app.scss",
               "src/styles.scss"
             ],

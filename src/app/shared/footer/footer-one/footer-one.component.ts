@@ -7,10 +7,6 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class FooterOneComponent implements OnInit {
 
-  @Input() class: string = 'footer-light' // Default class 
-  @Input() themeLogo: string = 'assets/images/icon/logo.png' // Default Logo
-  @Input() newsletter: boolean = false; // Default True
-
   public today: number = Date.now();
 
   constructor() { }

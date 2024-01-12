@@ -11,9 +11,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 
 export class HomeComponent implements OnInit, OnDestroy {
-
   public themeLogo: string = 'assets/images/icon/logo-14.png'; // Change Logo
-
   public products: Product[] = [];
   public productCollections: any[] = [];
 

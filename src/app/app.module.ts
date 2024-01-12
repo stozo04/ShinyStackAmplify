@@ -20,6 +20,10 @@ import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 import awsconfig from '../aws-exports';
 import { HomeComponent } from './home/home.component';
 import { CollectionComponent } from './home/widgets/collection/collection.component';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { faJedi } from '@fortawesome/free-solid-svg-icons';
+
 
 Amplify.configure(awsconfig);
 // AoT requires an exported function for factories
@@ -37,6 +41,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CollectionComponent
   ],
   imports: [
+    FontAwesomeModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AmplifyAuthenticatorModule,
     BrowserAnimationsModule,
@@ -62,4 +67,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private library: FaIconLibrary) {
+    library.addIcons(faUser, faJedi);
+  }
+}

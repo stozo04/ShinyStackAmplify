@@ -32,19 +32,19 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   // Collection
   public categories = [{
-    image: 'assets/images/categories/gold.jpg',
+    image: 'assets/images/products/gold/one_ounce_american_eagle_obverse.jpg',
     title: 'Gold',
     url: '/products/gold'
   }, {
-    image: 'assets/images/categories/Silver.jpg',
+    image: 'assets/images/products/silver/one_ounce_american_eagle_obverse.jpg',
     title: 'Silver',
     url: '/products/silver'
   }, {
-    image: 'assets/images/categories/copper.jpg',
+    image: 'assets/images/products/copper/one_ounce_american_eagle_obverse.jpg',
     title: 'Copper',
     url: '/products/copper'
   }, {
-    image: 'assets/images/categories/Supplies.jpg',
+    image: 'assets/images/products/supplies/supplies.jpg',
     title: 'Supplies',
     url: '/products/supplies'
   }]

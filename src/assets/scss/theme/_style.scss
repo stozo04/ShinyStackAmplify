@@ -1,3 +1,4 @@
+@import "~@fortawesome/fontawesome-free/css/all.css";
 /*-----------------------------------------------------------------------------------
 
     Template Name:Multikart
@@ -6994,10 +6995,10 @@ ngx-loading-bar {
             padding-bottom: 60px;
             border-top: 1px solid $round-border;
             img {
-                height: 65px;
-                width: 65px;
+                height: 100px;
+                width: 100px;
                 margin-right: 20px;
-                border-radius: 100%;
+                border-radius: 0%;
             }
             h6 {
                 color: $grey4;

@@ -15,16 +15,16 @@ import { AppComponent } from './app.component';
 import { PagesComponent } from './pages/pages.component';
 import { Amplify } from 'aws-amplify';
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
-// import awsconfig from '../aws-exports';
+import awsconfig from '../aws-exports';
 import { HomeComponent } from './home/home.component';
 import { CollectionComponent } from './home/widgets/collection/collection.component';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { faUser, faArrowAltCircleUp } from '@fortawesome/free-regular-svg-icons';
 import { faJedi } from '@fortawesome/free-solid-svg-icons';
 import { LoginComponent } from './login/login.component';
 
 
-// Amplify.configure(awsconfig);
+Amplify.configure(awsconfig);
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -67,6 +67,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 })
 export class AppModule {
   constructor(private library: FaIconLibrary) {
-    library.addIcons(faUser, faJedi);
+    library.addIcons(faUser, faJedi, faArrowAltCircleUp);
   }
 }

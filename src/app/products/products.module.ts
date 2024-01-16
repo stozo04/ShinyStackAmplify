@@ -10,7 +10,9 @@ import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
 import { SharedModule } from '../shared/shared.module';
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import { faArrowAltCircleUp } from '@fortawesome/free-regular-svg-icons';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
     SuppliesComponent
   ],
   imports: [
+    FontAwesomeModule,
     CommonModule,
     ProductsRoutingModule,
     CommonModule,
@@ -29,4 +32,10 @@ import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
     AmplifyAuthenticatorModule
   ]
 })
-export class ProductsModule { }
+
+
+export class ProductsModule {
+  constructor(private library: FaIconLibrary) {
+    library.addIcons(faArrowAltCircleUp);
+  }
+}

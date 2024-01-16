@@ -35,6 +35,7 @@
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "node_modules/@aws-amplify/ui-angular/theme.css",
               "src/assets/scss/app.scss",
               "src/styles.scss"

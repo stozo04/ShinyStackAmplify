@@ -12,8 +12,16 @@
             </div>
           </div>
           <div class="menu-right pull-right">
-            <div>
-              <app-settings></app-settings>
+            <div *ngIf="auth.isUserLoggedIn()">
+              <a [routerLink]="['/logout']" style="color: #e4604a;">
+                {{ auth.getUserEmail()}}
+              </a>
+             
+            </div>
+            <div *ngIf="!auth.isUserLoggedIn()">
+              <a [routerLink]="['/login']" style="color: #e4604a;">
+                <i class="fa-regular fa-user"></i>
+              </a>
             </div>
           </div>
         </div>

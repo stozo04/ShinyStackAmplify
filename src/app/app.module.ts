@@ -18,13 +18,12 @@ import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 import awsconfig from '../aws-exports';
 import { HomeComponent } from './home/home.component';
 import { CollectionComponent } from './home/widgets/collection/collection.component';
-import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faUser, faArrowAltCircleUp } from '@fortawesome/free-regular-svg-icons';
-import { faJedi } from '@fortawesome/free-solid-svg-icons';
 import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './home/logout/logout.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
-Amplify.configure(awsconfig);
+// Amplify.configure(awsconfig);
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -36,10 +35,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     PagesComponent,
     HomeComponent,
     CollectionComponent,
-    LoginComponent
+    LoginComponent,
+    LogoutComponent,
+    DashboardComponent
   ],
   imports: [
-    FontAwesomeModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AmplifyAuthenticatorModule,
     BrowserAnimationsModule,
@@ -65,8 +65,4 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  constructor(private library: FaIconLibrary) {
-    library.addIcons(faUser, faJedi, faArrowAltCircleUp);
-  }
-}
+export class AppModule { }

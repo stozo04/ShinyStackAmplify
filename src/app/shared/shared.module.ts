@@ -35,10 +35,6 @@ import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component'
 // Pipes
 
 
-// FontAwesome
-import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faUser } from '@fortawesome/free-regular-svg-icons';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -55,7 +51,6 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
     TapToTopComponent,
   ],
   imports: [
-    FontAwesomeModule,
     CommonModule,
     RouterModule,
     FormsModule,
@@ -88,8 +83,4 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
     TapToTopComponent,
   ]
 })
-export class SharedModule {
-  constructor(private library: FaIconLibrary) {
-    library.addIcons(faUser, faMagnifyingGlass);
-  }
-}
+export class SharedModule { }

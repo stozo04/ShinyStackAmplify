@@ -31,12 +31,15 @@ export class AuthService {
     const checkCurrentUser = async () => {
       try {
         const userData = await getCurrentUser();
-        this.setUser({
-          isLoggedIn: true,
-          userId: userData.userId,
-          userName: userData.username,
-          loginId: userData.signInDetails?.loginId || null, // Assuming loginId is the email
-        });
+        // Confirm all data exist on User Object.
+        if (userData.signInDetails.loginId && userData.userId && userData.username) {
+          this.setUser({
+            isLoggedIn: true,
+            userId: userData.userId,
+            userName: userData.username,
+            loginId: userData.signInDetails.loginId // Assuming loginId is the email
+          });
+        }
       } catch (error) {
         console.log('Error getting current authenticated user:', error);
         if (this.user.value && this.user.value.isLoggedIn) {
@@ -69,11 +72,7 @@ export class AuthService {
   }
 
   public isUserLoggedIn(): boolean {
-    console.log('isUserLoggedIn: ', this.user.value)
-    if (this.user.value && this.user.value.isLoggedIn) {
-      return true;
-    }
-    return false;
+    return (this.user.value && this.user.value.isLoggedIn)
   }
 
   public getUserEmail(): string {

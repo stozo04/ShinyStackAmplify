@@ -18,15 +18,6 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'pages',
-    component: PagesComponent,
-    loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
-  },
-  {
-    path: 'products',
-    loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
-  },
-  {
     path: 'login',
     component: LoginComponent
   },
@@ -37,6 +28,15 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent
+  },
+  {
+    path: 'pages',
+    component: PagesComponent,
+    loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
+  },
+  {
+    path: 'products',
+    loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
   },
   {
     path: '**', // Navigate to Home Page if not found any page

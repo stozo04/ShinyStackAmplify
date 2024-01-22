@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ProductRename, Type, BullionType } from '../../shared/classes/product';
 import { get, put } from 'aws-amplify/api';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { uploadData } from 'aws-amplify/storage';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-details-page',
@@ -19,16 +20,21 @@ export class DetailsPageComponent implements OnInit {
   bullionOptions = Object.values(BullionType);
   selectedFile: File | undefined = undefined;
   editCoinForm: UntypedFormGroup;
+  breadCrumbTitle: string;
+  breadCrumbPath: string;
 
   constructor(
     private route: ActivatedRoute,
-    private formBuilder: UntypedFormBuilder) {
+    private formBuilder: UntypedFormBuilder,
+    private toast: NgToastService
+  ) {
   }
 
   async ngOnInit(): Promise<void> {
     this.route.paramMap.subscribe((params) => {
-      console.log('params: ', params)
       this.productId = params.get('id');
+      this.breadCrumbTitle = params.get('type') + " Collection";
+      this.breadCrumbPath = params.get('format');
     });
 
     this.editCoinForm = this.formBuilder.group({
@@ -45,24 +51,23 @@ export class DetailsPageComponent implements OnInit {
       weight: ['', Validators.required],
     });
 
+    this.loadCoinDetails();
+  }
+
+  private async loadCoinDetails(): Promise<void> {
     // GET PRODUCT BY ID (WORKS)
     try {
       const restOperation = get({
         apiName: 'productsApi',
-        path: '/products',
-        options: {
-          queryParams: {
-            id: this.productId
-          }
-        }
+        path: `/products/object/${this.productId}`,
       });
       const { body } = await restOperation.response;
-      const json = await body.json() as unknown as ProductRename[];
+      const json = await body.json() as unknown as ProductRename;
+      this.product$.next(json);
+      this.product$.subscribe(res => this.editCoinForm.patchValue(res));
 
-      this.product$.next(json[0]);
-      this.product$.subscribe(res => console.log('HERE: ', this.editCoinForm.patchValue(res)));
-      console.log('GET call succeeded: ', json);
     } catch (error) {
+      this.toast.error({ detail: "ERROR", summary: `Error loading data: ${error.err}`, duration: 5000, position: 'topCenter' });
       console.log('GET call failed: ', error);
     }
   }
@@ -80,9 +85,11 @@ export class DetailsPageComponent implements OnInit {
         }
       });
       const response = await restOperation.response;
-      console.log('PUT call succeeded: ', response);
-    } catch (err) {
-      console.log('PUT call failed: ', err);
+      this.toast.success({ detail: "SUCCESS", summary: `Changes have been saved`, duration: 5000, position: 'topCenter' });
+      this.loadCoinDetails();
+    } catch (error) {
+      this.toast.error({ detail: "ERROR", summary: `Error saving data: ${error.err}`, duration: 5000, position: 'topCenter' });
+      console.log('PUT call failed: ', error);
     }
   }
 
@@ -97,7 +104,9 @@ export class DetailsPageComponent implements OnInit {
         data: this.selectedFile
       }).result;
       console.log('Succeeded: ', result);
+      this.toast.success({ detail: "SUCCESS", summary: `File Uploaded`, duration: 5000, position: 'topCenter' });
     } catch (error) {
+      this.toast.error({ detail: "ERROR", summary: `Error uploading file: ${error.err}`, duration: 5000, position: 'topCenter' });
       console.log('Error uploading file: ', error);
     }
   };

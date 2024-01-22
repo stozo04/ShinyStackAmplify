@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { getUrl, list, uploadData } from 'aws-amplify/storage';
 import { get, post, put } from 'aws-amplify/api';
 import { NewProduct, Type, BullionType } from '../../shared/classes/product';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-create-page',
@@ -13,9 +15,26 @@ export class CreatePageComponent implements OnInit {
   selectedFile: File | undefined = undefined;
   typeOptions = Object.values(Type);
   bullionOptions = Object.values(BullionType);
-  constructor() { }
+  createCoinForm: UntypedFormGroup;
+
+  constructor(
+    private formBuilder: UntypedFormBuilder,
+    private toast: NgToastService
+  ) { }
 
   async ngOnInit(): Promise<void> {
+    this.createCoinForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      preSignedURL: ['', Validators.required],
+      pcgsURL: [''],
+      type: ['', Validators.required],
+      bullionType: ['', Validators.required],
+      mintMark: [''],
+      quantity: ['', Validators.required],
+      purchasePrice: [''],
+      weight: ['', Validators.required],
+    });
     // POST PRODUCT (WORKS)
     // try {
     //   const product = {
@@ -61,6 +80,23 @@ export class CreatePageComponent implements OnInit {
     //   }
   }
 
+  public async addCoin(): Promise<void> {
+    try {
+      const restOperation = post({
+        apiName: 'productsApi',
+        path: `/products`,
+        options: {
+          body: this.createCoinForm.value,
+
+        }
+      });
+      const response = await restOperation.response;
+      this.toast.success({ detail: "SUCCESS", summary: `Changes have been saved`, duration: 5000, position: 'topCenter' });
+    } catch (error) {
+      this.toast.error({ detail: "ERROR", summary: `Error saving data: ${error.err}`, duration: 5000, position: 'topCenter' });
+      console.log('PUT call failed: ', error);
+    }
+  }
 
   uploadImage = async () => {
     console.log('uploadImage')

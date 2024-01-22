@@ -20,6 +20,7 @@ import { HomeComponent } from './home/home.component';
 import { CollectionComponent } from './home/widgets/collection/collection.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './home/logout/logout.component';
+import { NgToastModule } from 'ng-angular-popup'
 
 
 Amplify.configure(awsconfig);
@@ -38,6 +39,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LogoutComponent
   ],
   imports: [
+    NgToastModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AmplifyAuthenticatorModule,
     BrowserAnimationsModule,

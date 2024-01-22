@@ -54,6 +54,7 @@
     "lodash": "^4.17.21",
     "masonry-layout": "^4.2.2",
     "mousetrap": "^1.6.5",
+    "ng-angular-popup": "^0.5.2",
     "ng-animate": "^1.0.0",
     "ng-gallery": "^6.0.1",
     "ng-lazyload-image": "^9.1.3",

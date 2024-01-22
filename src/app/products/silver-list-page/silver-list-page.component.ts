@@ -1,6 +1,6 @@
 
 import { Component, OnInit, Input } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { ProductRename } from '../../shared/classes/product';
 import { get } from 'aws-amplify/api';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -13,17 +13,18 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class SilverListPageComponent implements OnInit {
   products$ = new BehaviorSubject<ProductRename[]>(null);
   public url: any;
+  breadCrumbTitle: string;
+  breadCrumbPath: string;
 
-  constructor(private router: Router) {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.url = event.url;
-      }
-    });
-  }
+  constructor(private route: ActivatedRoute) { }
 
   async ngOnInit(): Promise<void> {
-    console.log('here')
+    this.route.paramMap.subscribe((params) => {
+      this.breadCrumbTitle = params.get('type') + " Collection";
+      this.breadCrumbPath = params.get('format');
+      console.log('params: ', params)
+    });
+
     // GET PRODUCTS (WORKS)
     try {
       const restOperation = get({

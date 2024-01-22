@@ -1,5 +1,5 @@
 <app-header [sticky]="true" *ngIf="url != '/pages/comingsoon'"></app-header>
-<app-breadcrumb [title]="'Review'" [breadcrumb]="'Review'"></app-breadcrumb>
+<app-breadcrumb [title]="breadCrumbTitle" [breadcrumb]="breadCrumbPath"></app-breadcrumb>
 <!-- section start -->
 <ng-container *ngIf="products$ | async as products; else loading">
 <section class="section-b-space blog-detail-page review-page">
@@ -18,7 +18,7 @@
                                     <p style="font-weight: 700;">Quantity: {{ product.quantity }} &nbsp; Price: ${{ product.purchasePrice }}</p>
                                     <ul class="comnt-sec" *ngIf="product.pcgsURL">
                                         <li>
-                                            <a href="https://www.pcgs.com/coinfacts/coin/2021-1-peace-dollar-100th-anniversary/877714"
+                                            <a href="{{ product.pcgsURL }}"
                                             target="_blank"
                                             rel="noopener noreferrer">                                    
                                                 <i class="fa-solid fa-arrow-up-right-from-square"> PCGS </i>
@@ -28,6 +28,7 @@
                                 </div>
                             </div>
                         </li>
+                        <br />
                     </div>
                 </ul>
             </div>

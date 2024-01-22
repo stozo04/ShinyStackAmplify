@@ -1,6 +1,6 @@
 <!-- header -->
 <app-header [themeLogo]="themeLogo"></app-header>
-
+<app-breadcrumb [title]="breadCrumbTitle" [breadcrumb]="breadCrumbPath"></app-breadcrumb>
 <!-- section start -->
 <ng-container *ngIf="product$ | async as product; else loading">
 
@@ -16,7 +16,7 @@
               <input type="text" class="form-control" formControlName="name" required="">
             </div>
             <div class="col-md-6 select_input">
-              <label for="type">Bullion Type</label>
+              <label for="type" formControlName="bullionType">Bullion Type</label>
               <select class="form-control">
                 <option *ngFor="let type of bullionOptions" [value]="type">{{ type }}</option>
               </select>
@@ -28,7 +28,7 @@
 
             <div class="col-md-6 select_input">
               <label for="type">Type</label>
-              <select class="form-control">
+              <select class="form-control" formControlName="type">
                 <option *ngFor="let type of typeOptions" [value]="type">{{ type }}</option>
               </select>
             </div>

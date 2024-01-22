@@ -7,51 +7,52 @@
     <div class="row">
       <div class="col-sm-12">
         <h3>Add New Coin</h3>
-        <form class="theme-form">
+        <form class="theme-form" [formGroup]="createCoinForm">
+          <pre> {{ createCoinForm.value | json }} </pre>
           <div class="row">
             <div class="col-md-6">
               <label for="name">Name</label>
-              <input type="text" class="form-control" id="name" required="">
+              <input type="text" class="form-control" formControlName="name" required="">
             </div>
             <div class="col-md-6 select_input">
               <label for="type">Bullion Type</label>
-              <select class="form-control">
+              <select class="form-control" formControlName="bullionType">
                 <option *ngFor="let type of bullionOptions" [value]="type">{{ type }}</option>
               </select>
             </div>
             <div class="col-md-6">
               <label for="review">PCGS Link</label>
-              <input type="url" class="form-control" id="pcgsURL">
+              <input type="url" class="form-control" formControlName="pcgsURL">
             </div>
 
             <div class="col-md-6 select_input">
               <label for="type">Type</label>
-              <select class="form-control">
+              <select class="form-control" formControlName="type">
                 <option *ngFor="let type of typeOptions" [value]="type">{{ type }}</option>
               </select>
             </div>
             <div class="col-md-6">
               <label for="mintMark">Mint Mark</label>
-              <input type="text" class="form-control" id="mintMark">
+              <input type="text" class="form-control" formControlName="mintMark">
             </div>
             <div class="col-md-6">
               <label for="quantity">Quantity</label>
-              <input type="number" class="form-control" id="quantity">
+              <input type="number" class="form-control" formControlName="quantity">
             </div>
             <div class="col-md-6">
               <label for="purchasePrice">Purchase Price</label>
-              <input type="text" class="form-control" id="purchasePrice">
+              <input type="text" class="form-control" formControlName="purchasePrice">
             </div>
             <div class="col-md-6">
               <label for="weight">Weight</label>
-              <input type="text" class="form-control" id="weight">
+              <input type="text" class="form-control" formControlName="weight">
             </div>
             <div class="col-md-12">
               <label for="email">Description</label>
-              <textarea class="form-control" id="description"></textarea>
+              <textarea class="form-control" formControlName="description"></textarea>
             </div>
             <div class="col-md-12">
-              <button class="btn btn-sm btn-solid" type="submit">Add</button>
+              <button class="btn btn-sm btn-solid" (click)="addCoin()">Add</button>
             </div>
           </div>
         </form>

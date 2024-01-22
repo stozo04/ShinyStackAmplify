@@ -18,7 +18,7 @@
       "function": {
         "productsLambda": {
           "deploymentBucketName": "amplify-shinystacks-develop-110247-deployment",
-          "s3Key": "amplify-builds/productsLambda-534e667344316b55456a-build.zip"
+          "s3Key": "amplify-builds/productsLambda-336471312b36346f6e41-build.zip"
         },
         "productsTable": {}
       },

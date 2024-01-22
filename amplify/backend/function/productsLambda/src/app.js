@@ -13,6 +13,8 @@ const { DeleteCommand, DynamoDBDocumentClient, GetCommand, PutCommand, QueryComm
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
 const bodyParser = require('body-parser')
 const express = require('express')
+const { v4: uuidv4 } = require('uuid');
+
 
 const ddbClient = new DynamoDBClient({ region: process.env.TABLE_REGION });
 const ddbDocClient = DynamoDBDocumentClient.from(ddbClient);
@@ -164,6 +166,11 @@ app.put(path, async function(req, res) {
     req.body['userId'] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
   }
 
+  // Generate a GUID for the id if not provided
+  if (!req.body['id']) {
+    req.body['id'] = uuidv4();
+  }
+
   let putItemParams = {
     TableName: tableName,
     Item: req.body
@@ -186,6 +193,8 @@ app.post(path, async function(req, res) {
   if (userIdPresent) {
     req.body['userId'] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
   }
+
+  req.body['id'] = uuidv4();
 
   let putItemParams = {
     TableName: tableName,

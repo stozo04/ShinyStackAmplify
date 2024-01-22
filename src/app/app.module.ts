@@ -23,7 +23,7 @@ import { LogoutComponent } from './home/logout/logout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 
-// Amplify.configure(awsconfig);
+Amplify.configure(awsconfig);
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");

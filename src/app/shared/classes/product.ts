@@ -1,4 +1,26 @@
 // Products
+export interface ProductRename extends NewProduct {
+    id: string;
+}
+export interface NewProduct {
+    name: string;
+    description: string;
+    preSignedURL: string;
+    pcgsURL?: string;
+    type: ProductType;
+    mintMark?: string;
+    quantity: number;
+    purchasePrice?: number;
+    weight: string;
+}
+
+export enum ProductType {
+    GOLD = 'Gold',
+    SILVER = 'Silver',
+    COPPER = 'Copper',
+    SUPPLIES = 'Supplies'
+}
+
 export interface Product {
     id?: number;
     title?: string;

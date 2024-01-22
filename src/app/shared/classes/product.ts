@@ -7,14 +7,22 @@ export interface NewProduct {
     description: string;
     preSignedURL: string;
     pcgsURL?: string;
-    type: ProductType;
+    type: Type;
+    bullionType: BullionType;
     mintMark?: string;
     quantity: number;
     purchasePrice?: number;
     weight: string;
 }
 
-export enum ProductType {
+export enum Type {
+    COIN = 'Coin',
+    BAR = 'Bar',
+    ROUND = 'Round',
+    JUNK = 'Junk'
+}
+
+export enum BullionType {
     GOLD = 'Gold',
     SILVER = 'Silver',
     COPPER = 'Copper',

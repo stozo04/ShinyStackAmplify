@@ -1,18 +1,76 @@
 <!-- header -->
 <app-header [themeLogo]="themeLogo"></app-header>
 
-<img src="https://myproducts110247-develop.s3.us-west-2.amazonaws.com/public/silver_buffalo.jpg?x-amz-content-sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAXLVGJQXEGAH6WDR6%2F20240122%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240122T171735Z&X-Amz-SignedHeaders=host&X-Amz-Expires=900&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEJH%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIBVRHezAOuPsfCR6pDrC2YooTtec3FCM3Trbe0vQSWgIAiEAwXF631PleZIA1PGFCB%2Bj4cjEekjGLol%2B3bYC7T3QpCgqxAQIShAAGgw1MDYwODExNTA0MDgiDCIEs2NAJ9GDpP5GICqhBPUIzuuRRKPahd90zqxupATVZffDyfO9e4wofpCSwQ6RvO5WU3uf1YroBwKndywxUTyk6IKBErV82KobogbaNFKnWUZ99tmrO267GD1KU0MBmIFG%2F%2BxAfkUu5UBrZWeWqNr7i54oVU7DRmkjd5fLFFbqm0OCiBa79pNlgypBDi8805MwGokdICEFqAWkPi5gtQEAytSoqs4AJQZlxK8zGeoqy09w8vNa154pGTJo3jSvWqSy6CwfD05oT7OQ7r8PqyymoGvGF4b2HCuZ1k0z2O23%2BMdAoOm7leteD%2BSA3ypJpGnxOA6tYmpqgDkrxv5i2Y16bW%2FwGeBqAXJerBQdVFa9EMnmUmcO87gsg4WPEmRx8p3Nxuk3hNw%2BTeQ2afbBxr9J%2Bs1pCrG2u9t0gLGJ%2B%2BoRGHYYNtRFeJF%2BMothAKGbcKjb%2FHtECgYvkiVPhkD7O9%2BRia3dKXcCBM6%2F%2FfwRGI1CFMOHDiP1JCOukEyOQwiNKyevN7%2BRwTDA2szcVWXNRkm01yqitUhgNNs0n2lIMg5VGXfb8zyY3xmb7brw%2B5HkyxtklGvN9XlrI%2BQAXTzFrPZCCQQOqu%2BYTDvr%2BWLKFvL%2Bp2trg5Is5w0qoXJ4h1reKyC%2FmuQio7VxWZWwWocmft6CcGNQnU3qBKcYGpyoMNOQNG7pdPLhFbP%2FrSKjJ450nsTo%2FrbsCu7%2BX0liamS%2BYzKScUG%2Bs5eMoVQ7qGuNSBZ9MK7Guq0GOoUC7BFDO6GVqqjTD80b2Yv0xDx%2FLgmmaECm0zkbCPng%2F%2BfVfCN68fQFjndtswEOnwXo4TKNMTHFfzjCNXx7LGVFjlbqG%2FGps1zQAQ5uBDpp5j1PGxdGm%2B2c7iE0zjLgYYSkpE25mOjcPbb39Azgwpd%2F41asLWNVVxyZoln%2FC%2FF176sfIBL2pJ27D4MmQvwm6vpe60ALrruiPZqYg5YpKmJP43fOqVS5rF5IjYgD%2FGpYC79%2FmVkq%2BzwNry4sXtJhLXgr%2FEqRZLPBT%2B1vze5rBGT1Y30%2FwbJu6ty3Ucr0Lrz7gApCqRheT2pZGU23gJxBKdZHqGFOWkknbWz9eXujdIgFsAi7AO4m&X-Amz-Signature=bc1bf72062567f660509d90869a79911eb3965bacc2ef40d058b698b63d57cd2" />
-<input
-  type="file"
-  id="imageUpload"
-  name="imageUpload"
-  accept="image/png, image/jpeg"
-  (change)="imageSelected($event)"
-/>
+<!-- section start -->
+<section class="contact-page register-page section-b-space">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h3>Add New Coin</h3>
+        <form class="theme-form">
+          <div class="row">
+            <div class="col-md-6">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" required="">
+            </div>
+            <div class="col-md-6 select_input">
+              <label for="type">Bullion Type</label>
+              <select class="form-control">
+                <option *ngFor="let type of bullionOptions" [value]="type">{{ type }}</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="review">PCGS Link</label>
+              <input type="url" class="form-control" id="pcgsURL">
+            </div>
 
-<button class="aws-button" (click)="uploadImage()">
-  Upload
-</button>
+            <div class="col-md-6 select_input">
+              <label for="type">Type</label>
+              <select class="form-control">
+                <option *ngFor="let type of typeOptions" [value]="type">{{ type }}</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="mintMark">Mint Mark</label>
+              <input type="text" class="form-control" id="mintMark">
+            </div>
+            <div class="col-md-6">
+              <label for="quantity">Quantity</label>
+              <input type="number" class="form-control" id="quantity">
+            </div>
+            <div class="col-md-6">
+              <label for="purchasePrice">Purchase Price</label>
+              <input type="text" class="form-control" id="purchasePrice">
+            </div>
+            <div class="col-md-6">
+              <label for="weight">Weight</label>
+              <input type="text" class="form-control" id="weight">
+            </div>
+            <div class="col-md-12">
+              <label for="email">Description</label>
+              <textarea class="form-control" id="description"></textarea>
+            </div>
+            <div class="col-md-12">
+              <button class="btn btn-sm btn-solid" type="submit">Add</button>
+            </div>
+          </div>
+        </form>
+        <br />
+        <div class="row">
+          <div class="col-md-6">
+          <input type="file" id="imageUpload" name="imageUpload" accept="image/png, image/jpeg, image/jpg" (change)="imageSelected($event)" />
+        </div>
+        <div class="col-md-6">
+          <button  class="btn btn-sm btn-solid" (click)="uploadImage()">
+            Upload
+          </button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section ends -->
 
 <!-- footer -->
 <app-footer-one></app-footer-one>

@@ -5,7 +5,6 @@ import { PagesComponent } from './pages/pages.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './home/logout/logout.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -24,10 +23,6 @@ const routes: Routes = [
   {
     path: 'logout',
     component: LogoutComponent
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent
   },
   {
     path: 'pages',

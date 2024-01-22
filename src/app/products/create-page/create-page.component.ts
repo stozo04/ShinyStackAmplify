@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { getUrl, list, uploadData } from 'aws-amplify/storage';
 import { get, post, put } from 'aws-amplify/api';
-import { NewProduct } from '../shared/classes/product';
-import { Type, BullionType } from '../shared/classes/product';
+import { NewProduct, Type, BullionType } from '../../shared/classes/product';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  selector: 'app-create-page',
+  templateUrl: './create-page.component.html',
+  styleUrl: './create-page.component.scss'
 })
-export class DashboardComponent implements OnInit {
+export class CreatePageComponent implements OnInit {
   public themeLogo: string = 'assets/images/icon/logo-14.png'; // TODO: Change Logo
   selectedFile: File | undefined = undefined;
   typeOptions = Object.values(Type);

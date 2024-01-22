@@ -34,15 +34,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   public categories = [{
     image: 'assets/images/products/gold/one_ounce_american_eagle_obverse.jpg',
     title: 'Gold',
-    url: '/products/gold'
+    url: '/products/gold/format'
   }, {
     image: 'assets/images/products/silver/one_ounce_american_eagle_obverse.jpg',
     title: 'Silver',
-    url: '/products/silver'
+    url: '/products/silver/format'
   }, {
     image: 'assets/images/products/copper/one_ounce_american_eagle_obverse.jpg',
     title: 'Copper',
-    url: '/products/copper'
+    url: '/products/copper/format'
   }, {
     image: 'assets/images/products/supplies/supplies.jpg',
     title: 'Supplies',

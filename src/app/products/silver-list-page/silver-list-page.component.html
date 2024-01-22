@@ -1,101 +1,43 @@
-<!-- header -->
-<app-header [themeLogo]="themeLogo"></app-header>
-
-<app-breadcrumb [title]="'Silver Collection'" [breadcrumb]="'Home'"></app-breadcrumb>
-<!--section start-->
-<section class="collection section-b-space">
+<app-header [sticky]="true" *ngIf="url != '/pages/comingsoon'"></app-header>
+<app-breadcrumb [title]="'Review'" [breadcrumb]="'Review'"></app-breadcrumb>
+<!-- section start -->
+<ng-container *ngIf="products$ | async as products; else loading">
+<section class="section-b-space blog-detail-page review-page">
     <div class="container">
-        <div class="row partition-collection">
-            <div class="col-lg-3 col-md-6">
-                <div class="collection-block">
-                    <img src="assets/images/products/silver/american_silver_eagle.jpg" class="img-fluid" alt="">
-                    <div class="collection-content">
-                        <h3>coins</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                        <a [routerLink]="['/home/fashion']" class="btn btn-outline">View</a>
+        <div class="row">
+            <div class="col-sm-12">
+                <ul class="comment-section">
+                    <div *ngFor="let product of products">
+                        <li>
+                            <div class="media">
+                                <img [src]="product.preSignedURL" />
+                                <div class="media-body">
+                                    <h6><a routerLink="../{{product.id}}" >{{ product.name }}</a> <span *ngIf="product.mintMark">( {{ product.mintMark }} )</span></h6>
+                                    <p>{{ product.description }}</p>
+                                    <p>&nbsp;</p>
+                                    <p style="font-weight: 700;">Quantity: {{ product.quantity }} &nbsp; Price: ${{ product.purchasePrice }}</p>
+                                    <ul class="comnt-sec" *ngIf="product.pcgsURL">
+                                        <li>
+                                            <a href="https://www.pcgs.com/coinfacts/coin/2021-1-peace-dollar-100th-anniversary/877714"
+                                            target="_blank"
+                                            rel="noopener noreferrer">                                    
+                                                <i class="fa-solid fa-arrow-up-right-from-square"> PCGS </i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="collection-block">
-                    <img src="assets/images/products/silver/bar.jpg" class="img-fluid" alt="">
-                    <div class="collection-content">
-                        <h3>bars</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                        <a [routerLink]="['/home/fashion']" class="btn btn-outline">View</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="collection-block">
-                    <img src="assets/images/products/silver/silver_buffalo.jpg" class="img-fluid" alt="">
-                    <div class="collection-content">
-                        <h3>rounds</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                        <a [routerLink]="['/home/fashion']" class="btn btn-outline">View</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="collection-block">
-                    <img src="assets/images/products/silver/junk_silver.jpg" class="img-fluid" alt="">
-                    <div class="collection-content">
-                        <h3>junk</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                        <a [routerLink]="['/home/fashion']" class="btn btn-outline">View</a>
-                    </div>
-                </div>
+                </ul>
             </div>
         </div>
-        <!-- <div class="row partition-collection section-t-space">
-            <div class="col-lg-3 col-md-6">
-                <div class="collection-block">
-                    <img src="assets/images/collection/5.jpg" class="img-fluid" alt="">
-                    <div class="collection-content">
-                        <h4>(20 products)</h4>
-                        <h3>fashion</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                        <a [routerLink]="['/home/fashion']" class="btn btn-outline">shop now !</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="collection-block">
-                    <img src="assets/images/collection/6.jpg" class="img-fluid" alt="">
-                    <div class="collection-content">
-                        <h4>(20 products)</h4>
-                        <h3>fashion</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                        <a [routerLink]="['/home/fashion']" class="btn btn-outline">shop now !</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="collection-block">
-                    <img src="assets/images/collection/7.jpg" class="img-fluid" alt="">
-                    <div class="collection-content">
-                        <h4>(20 products)</h4>
-                        <h3>fashion</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                        <a [routerLink]="['/home/fashion']" class="btn btn-outline">shop now !</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="collection-block">
-                    <img src="assets/images/collection/8.jpg" class="img-fluid" alt="">
-                    <div class="collection-content">
-                        <h4>(20 products)</h4>
-                        <h3>fashion</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                        <a [routerLink]="['/home/fashion']" class="btn btn-outline">shop now !</a>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </div>
 </section>
-<!--Section ends-->
+</ng-container>
 
-<!-- footer -->
+<ng-template #loading>
+    <p>LOADING</p>
+</ng-template>
+<!-- section end -->
 <app-footer-one></app-footer-one>

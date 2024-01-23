@@ -13,7 +13,7 @@
             <div *ngFor="let product of products">
               <li>
                 <div class="media">
-                  <img [src]="product.imageKey" />
+                  <img src="{{product.presignedURL}}" *ngIf="product.presignedURL !== null"/>
                   <div class="media-body">
                     <h6>
                       <a routerLink="../{{ product.id }}">{{ product.name }}</a>

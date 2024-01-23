@@ -1,9 +1,9 @@
 
-import { Component, OnInit, Input } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../shared/classes/product';
-import { get } from 'aws-amplify/api';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
   selector: 'app-silver-list-page',
@@ -11,40 +11,23 @@ import { BehaviorSubject, Observable } from 'rxjs';
   styleUrl: './silver-list-page.component.scss'
 })
 export class SilverListPageComponent implements OnInit {
-  products$ = new BehaviorSubject<Product[]>(null);
+  products$: Observable<Product[]>;
   public url: any;
   breadCrumbTitle: string;
   breadCrumbPath: string;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private route: ActivatedRoute,
+    private productService: ProductService
+  ) { }
 
   async ngOnInit(): Promise<void> {
     this.route.paramMap.subscribe((params) => {
       this.breadCrumbTitle = params.get('type') + " Collection";
       this.breadCrumbPath = params.get('format');
-      console.log('params: ', params)
     });
 
-    // GET PRODUCTS (WORKS)
-    try {
-      const restOperation = get({
-        apiName: 'productsApi',
-        path: '/products',
-        options: {
-          queryParams: {
-            bullionType: 'Silver'
-          }
-        }
-      });
-      const { body } = await restOperation.response;
-      const json = await body.json() as unknown as Product[];
-      this.products$.next(json);
-      this.products$.subscribe(x => console.log('HERE: ', x));
-      console.log('GET call succeeded: ', json);
-    } catch (error) {
-      console.log('GET call failed: ', error);
-    }
+    this.products$ = await this.productService.getProducts(true);
   }
-
 }
 

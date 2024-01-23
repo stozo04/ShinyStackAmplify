@@ -13,18 +13,18 @@ export interface NewProduct {
     quantity: number;
     purchasePrice?: number;
     weight: string;
+    signedURL?: string; // NOTE: This is auto-genreated
 }
 
 export enum Type {
-    COIN = 'Coin',
-    BAR = 'Bar',
-    ROUND = 'Round',
-    JUNK = 'Junk'
+    COIN = 'COIN',
+    BAR = 'BAR',
+    ROUND = 'ROUND',
+    JUNK = 'JUNK'
 }
 
 export enum BullionType {
-    GOLD = 'Gold',
-    SILVER = 'Silver',
-    COPPER = 'Copper',
-    SUPPLIES = 'Supplies'
+    GOLD = 'GOLD',
+    SILVER = 'SILVER',
+    COPPER = 'COPPER',
 }

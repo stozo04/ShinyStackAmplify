@@ -10,11 +10,11 @@
         <form class="theme-form" [formGroup]="createCoinForm">
           <div class="row">
             <div class="col-md-6">
-              <label for="name">Name</label>
+              <label for="name">Name *</label>
               <input type="text" class="form-control" formControlName="name" required="">
             </div>
             <div class="col-md-6 select_input">
-              <label for="type">Bullion Type</label>
+              <label for="type">Bullion Type *</label>
               <select class="form-control" formControlName="bullionType">
                 <option *ngFor="let type of bullionOptions" [value]="type">{{ type }}</option>
               </select>
@@ -25,7 +25,7 @@
             </div>
 
             <div class="col-md-6 select_input">
-              <label for="type">Type</label>
+              <label for="type">Format *</label>
               <select class="form-control" formControlName="type">
                 <option *ngFor="let type of typeOptions" [value]="type">{{ type }}</option>
               </select>
@@ -43,11 +43,11 @@
               <input type="text" class="form-control" formControlName="purchasePrice">
             </div>
             <div class="col-md-6">
-              <label for="weight">Weight</label>
+              <label for="weight">Weight *</label>
               <input type="text" class="form-control" formControlName="weight">
             </div>
             <div class="col-md-12">
-              <label for="email">Description</label>
+              <label for="email">Description *</label>
               <textarea class="form-control" formControlName="description"></textarea>
             </div>
             <div class="col-md-12">

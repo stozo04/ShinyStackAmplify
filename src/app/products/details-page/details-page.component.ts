@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product, Type, BullionType } from '../../shared/classes/product';
-import { get, put } from 'aws-amplify/api';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { uploadData } from 'aws-amplify/storage';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgToastService } from 'ng-angular-popup';
+import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
   selector: 'app-details-page',
@@ -14,7 +14,7 @@ import { NgToastService } from 'ng-angular-popup';
 })
 export class DetailsPageComponent implements OnInit {
   public themeLogo: string = '../../assets/images/icon/logo-14.png'; // Change Logo
-  product$ = new BehaviorSubject<Product>(null);
+  product$: Observable<Product>;
   productId: string;
   typeOptions = Object.values(Type);
   bullionOptions = Object.values(BullionType);
@@ -26,7 +26,9 @@ export class DetailsPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private formBuilder: UntypedFormBuilder,
-    private toast: NgToastService
+    private toast: NgToastService,
+    private productService: ProductService,
+    private router: Router,
   ) {
   }
 
@@ -41,7 +43,7 @@ export class DetailsPageComponent implements OnInit {
       id: ['', Validators.required],
       name: ['', Validators.required],
       description: ['', Validators.required],
-      imageKey: ['', Validators.required],
+      imageKey: [''],
       pcgsURL: [''],
       type: ['', Validators.required],
       bullionType: ['', Validators.required],
@@ -55,42 +57,19 @@ export class DetailsPageComponent implements OnInit {
   }
 
   private async loadCoinDetails(): Promise<void> {
-    // GET PRODUCT BY ID (WORKS)
-    try {
-      const restOperation = get({
-        apiName: 'productsApi',
-        path: `/products/object/${this.productId}`,
-      });
-      const { body } = await restOperation.response;
-      const json = await body.json() as unknown as Product;
-      this.product$.next(json);
-      this.product$.subscribe(res => this.editCoinForm.patchValue(res));
-
-    } catch (error) {
-      this.toast.error({ detail: "ERROR", summary: `Error loading data: ${error.err}`, duration: 5000, position: 'topCenter' });
-      console.log('GET call failed: ', error);
-    }
+    this.product$ = await this.productService.getProduct(this.productId, true);
+    this.product$.subscribe(res => this.editCoinForm.patchValue(res));
   }
 
   public async updateChanges(): Promise<void> {
-    try {
-      const restOperation = put({
-        apiName: 'productsApi',
-        path: `/products`,
-        options: {
-          body: this.editCoinForm.value,
-          queryParams: {
-            id: this.productId
-          }
-        }
-      });
-      const response = await restOperation.response;
-      this.toast.success({ detail: "SUCCESS", summary: `Changes have been saved`, duration: 5000, position: 'topCenter' });
-      this.loadCoinDetails();
-    } catch (error) {
-      this.toast.error({ detail: "ERROR", summary: `Error saving data: ${error.err}`, duration: 5000, position: 'topCenter' });
-      console.log('PUT call failed: ', error);
-    }
+    this.product$ = await this.productService.updateProduct(this.editCoinForm.value);
+    this.toast.success({ detail: "SUCCESS", summary: `Changes have been saved`, duration: 5000, position: 'topCenter' });
+  }
+
+  public async deleteCoin(): Promise<void> {
+    this.product$ = await this.productService.deleteProduct(this.productId);
+    this.toast.success({ detail: "SUCCESS", summary: `Changes have been saved`, duration: 5000, position: 'topCenter' });
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   uploadImage = async () => {

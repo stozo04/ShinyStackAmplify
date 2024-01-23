@@ -1,120 +1,134 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map, startWith, delay } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
+import { Observable, of } from 'rxjs';
 import { Product } from '../classes/product';
+import { generateClient } from 'aws-amplify/api';
+import { getUrl } from 'aws-amplify/storage';
+import { listProducts } from '../../../graphql/queries';
+import { updateProduct, deleteProduct, createProduct } from '../../../graphql/mutations';
+import { NgToastService } from 'ng-angular-popup';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  constructor(
-    private http: HttpClient,
-    private toastrService: ToastrService
-  ) { }
+  client = generateClient();
+  constructor(private toast: NgToastService) { }
 
-  /*
-    ---------------------------------------------
-    ---------------  Product  -------------------
-    ---------------------------------------------
-  */
+  // Product
+  public async createProduct(product: Product): Promise<Observable<Product>> {
+    try {
+      const result = await this.client.graphql({
+        query: createProduct,
+        variables: {
+          input: product
+        }
+      });
+      console.log(result.errors[0])
+      if (result.errors[0] !== undefined) {
+        console.log(result.errors[0])
+        this.toast.error({ detail: "ERROR", summary: `Error saving data: ${result.errors[0].message}`, duration: 5000, position: 'topCenter' });
+        return of(null);
+      }
+      return of(result);
+    }
+    catch (error) {
+      this.toast.error({ detail: "ERROR", summary: `Error saving data: ${error.err}`, duration: 5000, position: 'topCenter' });
+      console.log('createProduct call failed: ', error);
+    }
+  }
 
-  // // Product
-  // private get products(): Observable<Product[]> {
-  //   this.Products = this.http.get<Product[]>('assets/data/products.json').pipe(map(data => data));
-  //   this.Products.subscribe(next => { localStorage['products'] = JSON.stringify(next) });
-  //   return this.Products = this.Products.pipe(startWith(JSON.parse(localStorage['products'] || '[]')));
+  public async getProduct(id: string, withImage: boolean): Promise<Observable<Product>> {
+    try {
+      const result = await this.client.graphql({ query: listProducts, variables: { id: id } });
+      console.log('result: ', result)
+      if (withImage) {
+        // Get Presigned URL
+        result.data.listProducts.items.forEach(async item => {
+          if (item.imageKey !== null) {
+            const signedURL = await getUrl({ key: item.imageKey });
+            item.presignedURL = signedURL.url;
+          }
+        });
+      }
+      return of(result.data.listProducts.items[0]);
+    }
+    catch (error) {
+      this.toast.error({ detail: "ERROR", summary: `Error loading data: ${error.err}`, duration: 5000, position: 'topCenter' });
+      console.log('getProducts call failed: ', error);
+    }
+  }
+
+  public async getProducts(withImage: boolean): Promise<Observable<Product[]>> {
+    try {
+      const result = await this.client.graphql({ query: listProducts });
+      if (withImage) {
+        // Get Presigned URL
+        result.data.listProducts.items.forEach(async item => {
+          if (item.imageKey !== null) {
+            const signedURL = await getUrl({ key: item.imageKey });
+            item.presignedURL = signedURL.url;
+          }
+        });
+      }
+      return of(result.data.listProducts.items);
+    }
+    catch (error) {
+      this.toast.error({ detail: "ERROR", summary: `Error loading data: ${error.err}`, duration: 5000, position: 'topCenter' });
+      console.log('getProducts call failed: ', error);
+    }
+  }
+
+  public async updateProduct(product: Product): Promise<Observable<Product>> {
+    try {
+      const result = await this.client.graphql({
+        query: updateProduct,
+        variables: {
+          input: product
+        }
+      });
+
+      return of(result);
+    }
+    catch (error) {
+      this.toast.error({ detail: "ERROR", summary: `Error saving data: ${error.err}`, duration: 5000, position: 'topCenter' });
+      console.log('updateProduct call failed: ', error);
+    }
+  }
+
+  public async deleteProduct(id: string): Promise<Observable<any>> {
+    try {
+
+      const result = this.client.graphql({
+        query: deleteProduct,
+        variables: {
+          input: {
+            id: id
+          }
+        }
+      });
+
+      return of(null);
+    }
+    catch (error) {
+      console.log('GET call failed: ', error);
+    }
+  }
+
+  //GET ALL IMAGES
+  // try {
+  //   const response = await list({
+  //     prefix: '',
+  //     options: {
+  //       listAll: true
+  //     }
+  //   });
+  //   console.log('files: ', response)
+
+  //   response.items.forEach(async image => {
+  //     //const url = await getUrl({ key: image.key });
+  //     console.log('image: ', image)
+  //   });
+  // } catch (error) {
+  //   console.log('Error ', error);
   // }
-
-  // // Get Products
-  // public get getProducts(): Observable<Product[]> {
-  //   return this.products;
-  // }
-
-  // // Get Products By Slug
-  // public getProductBySlug(slug: string): Observable<Product> {
-  //   return this.products.pipe(map(items => { 
-  //     return items.find((item: any) => { 
-  //       return item.title.replace(' ', '-') === slug; 
-  //     }); 
-  //   }));
-
-
-
-
-  /*
-    ---------------------------------------------
-    ------------  Filter Product  ---------------
-    ---------------------------------------------
-  */
-
-  // Get Product Filter
-  // public filterProducts(filter: any): Observable<Product[]> {
-  //   return this.products.pipe(map(product => 
-  //     product.filter((item: Product) => {
-  //       if (!filter.length) return true
-  //       const Tags = filter.some((prev) => { // Match Tags
-  //         if (item.tags) {
-  //           if (item.tags.includes(prev)) {
-  //             return prev
-  //           }
-  //         }
-  //       })
-  //       return Tags
-  //     })
-  //   ));
-  // }
-
-  // Sorting Filter
-  // public sortProducts(products: Product[], payload: string): any {
-
-  //   if(payload === 'ascending') {
-  //     return products.sort((a, b) => {
-  //       if (a.id < b.id) {
-  //         return -1;
-  //       } else if (a.id > b.id) {
-  //         return 1;
-  //       }
-  //       return 0;
-  //     })
-  //   } else if (payload === 'a-z') {
-  //     return products.sort((a, b) => {
-  //       if (a.title < b.title) {
-  //         return -1;
-  //       } else if (a.title > b.title) {
-  //         return 1;
-  //       }
-  //       return 0;
-  //     })
-  //   } else if (payload === 'z-a') {
-  //     return products.sort((a, b) => {
-  //       if (a.title > b.title) {
-  //         return -1;
-  //       } else if (a.title < b.title) {
-  //         return 1;
-  //       }
-  //       return 0;
-  //     })
-  //   } else if (payload === 'low') {
-  //     return products.sort((a, b) => {
-  //       if (a.price < b.price) {
-  //         return -1;
-  //       } else if (a.price > b.price) {
-  //         return 1;
-  //       }
-  //       return 0;
-  //     })
-  //   } else if (payload === 'high') {
-  //     return products.sort((a, b) => {
-  //       if (a.price > b.price) {
-  //         return -1;
-  //       } else if (a.price < b.price) {
-  //         return 1;
-  //       }
-  //       return 0;
-  //     })
-  //   } 
-  // }
-
 }

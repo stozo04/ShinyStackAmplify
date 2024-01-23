@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProductRename, Type, BullionType } from '../../shared/classes/product';
+import { Product, Type, BullionType } from '../../shared/classes/product';
 import { get, put } from 'aws-amplify/api';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { uploadData } from 'aws-amplify/storage';
@@ -14,7 +14,7 @@ import { NgToastService } from 'ng-angular-popup';
 })
 export class DetailsPageComponent implements OnInit {
   public themeLogo: string = '../../assets/images/icon/logo-14.png'; // Change Logo
-  product$ = new BehaviorSubject<ProductRename>(null);
+  product$ = new BehaviorSubject<Product>(null);
   productId: string;
   typeOptions = Object.values(Type);
   bullionOptions = Object.values(BullionType);
@@ -41,7 +41,7 @@ export class DetailsPageComponent implements OnInit {
       id: ['', Validators.required],
       name: ['', Validators.required],
       description: ['', Validators.required],
-      preSignedURL: ['', Validators.required],
+      imageKey: ['', Validators.required],
       pcgsURL: [''],
       type: ['', Validators.required],
       bullionType: ['', Validators.required],
@@ -62,7 +62,7 @@ export class DetailsPageComponent implements OnInit {
         path: `/products/object/${this.productId}`,
       });
       const { body } = await restOperation.response;
-      const json = await body.json() as unknown as ProductRename;
+      const json = await body.json() as unknown as Product;
       this.product$.next(json);
       this.product$.subscribe(res => this.editCoinForm.patchValue(res));
 

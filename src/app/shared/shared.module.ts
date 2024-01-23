@@ -19,10 +19,6 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
-// Modals Components
-import { QuickViewComponent } from './components/modal/quick-view/quick-view.component';
-import { SizeModalComponent } from './components/modal/size-modal/size-modal.component';
-
 // Skeleton Loader Components
 import { SkeletonProductBoxComponent } from './components/skeleton/skeleton-product-box/skeleton-product-box.component';
 
@@ -31,8 +27,6 @@ import { LayoutBoxComponent } from './components/layout-box/layout-box.component
 
 // Tap To Top
 import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component';
-
-// Pipes
 
 
 
@@ -44,8 +38,6 @@ import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component'
     SettingsComponent,
     BreadcrumbComponent,
     CategoriesComponent,
-    QuickViewComponent,
-    SizeModalComponent,
     SkeletonProductBoxComponent,
     LayoutBoxComponent,
     TapToTopComponent,
@@ -76,8 +68,6 @@ import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component'
     FooterComponent,
     BreadcrumbComponent,
     CategoriesComponent,
-    QuickViewComponent,
-    SizeModalComponent,
     SkeletonProductBoxComponent,
     LayoutBoxComponent,
     TapToTopComponent,

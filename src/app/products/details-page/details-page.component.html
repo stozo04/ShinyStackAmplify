@@ -16,8 +16,8 @@
               <input type="text" class="form-control" formControlName="name" required="">
             </div>
             <div class="col-md-6 select_input">
-              <label for="type" formControlName="bullionType">Bullion Type</label>
-              <select class="form-control">
+              <label for="type">Bullion Type</label>
+              <select class="form-control" formControlName="bullionType">
                 <option *ngFor="let type of bullionOptions" [value]="type">{{ type }}</option>
               </select>
             </div>

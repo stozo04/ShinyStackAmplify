@@ -12,8 +12,8 @@ export class CategoriesComponent implements OnInit {
   public products: Product[] = [];
   public collapse: boolean = true;
 
-  constructor(public productService: ProductService) { 
-    this.productService.getProducts.subscribe(product => this.products = product);
+  constructor(public productService: ProductService) {
+
   }
 
   ngOnInit(): void {

@@ -144,6 +144,7 @@ app.get(path + '/object' + hashKeyPath + sortKeyPath, async function(req, res) {
 
   try {
     const data = await ddbDocClient.send(new GetCommand(getItemParams));
+    console.log('data: ', data);
     if (data.Item) {
       res.json(data.Item);
     } else {

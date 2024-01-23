@@ -5,7 +5,7 @@ export interface Product extends NewProduct {
 export interface NewProduct {
     name: string;
     description: string;
-    imageKey: string;
+    imageKey?: string;
     pcgsURL?: string;
     type: Type;
     bullionType: BullionType;

@@ -18,12 +18,13 @@
       "function": {
         "productsLambda": {
           "deploymentBucketName": "amplify-shinystacks-develop-110247-deployment",
-          "s3Key": "amplify-builds/productsLambda-336471312b36346f6e41-build.zip"
+          "s3Key": "amplify-builds/productsLambda-762f38655472776d7a53-build.zip"
         },
         "productsTable": {}
       },
       "api": {
-        "productsApi": {}
+        "productsApi": {},
+        "shinystacks": {}
       },
       "storage": {
         "productsStorage": {},

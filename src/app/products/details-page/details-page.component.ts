@@ -75,7 +75,6 @@ export class DetailsPageComponent implements OnInit {
   }
 
   uploadImage = async () => {
-    console.log('uploadImage')
     if (!this.selectedFile) {
       return;
     }

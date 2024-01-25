@@ -46,6 +46,10 @@
                 <label for="weight">Weight *</label>
                 <input type="text" class="form-control" formControlName="weight">
               </div>
+              <div class="col-md-6">
+                <label for="imageKey">Image Key</label>
+                <input type="text" class="form-control" formControlName="imageKey">
+              </div>
               <div class="col-md-12">
                 <label for="email">Description *</label>
                 <textarea class="form-control" formControlName="description"></textarea>
@@ -65,6 +69,11 @@
   <section>
     <div class="container">
       <div class="row">
+        <div class="col-md-12">
+          <img src="{{product.presignedURL}}" *ngIf="product.presignedURL !== null"/>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-md-6">
           <input type="file" id="imageUpload" name="imageUpload" accept="image/png, image/jpeg, image/jpg"
             (change)="imageSelected($event)" />
@@ -80,7 +89,13 @@
 </ng-container>
 
 <ng-template #loading>
-  <p>LOADING</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4"> &nbsp; </div>
+      <div class="col-md-4"> <h2 style="margin-top: 2rem;">LOADING</h2> </div>
+      <div class="col-md-4"> &nbsp; </div>
+    </div>
+  </div>
 </ng-template>
 <!-- Section ends -->
 

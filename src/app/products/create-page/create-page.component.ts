@@ -4,6 +4,7 @@ import { Format, BullionType } from '../../shared/classes/product';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgToastService } from 'ng-angular-popup';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-create-page',
@@ -36,7 +37,6 @@ export class CreatePageComponent implements OnInit {
       purchasePrice: [''],
       weight: ['', Validators.required],
     });
-
   }
 
   public async addCoin(): Promise<void> {
@@ -45,17 +45,18 @@ export class CreatePageComponent implements OnInit {
   }
 
   uploadImage = async () => {
-    console.log('uploadImage')
     if (!this.selectedFile) {
       return;
     }
     try {
       const result = uploadData({
-        key: this.selectedFile.name,
+        key: uuidv4(),
         data: this.selectedFile
       }).result;
       console.log('Succeeded: ', result);
+      this.toast.success({ detail: "SUCCESS", summary: `File Uploaded`, duration: 5000, position: 'topCenter' });
     } catch (error) {
+      this.toast.error({ detail: "ERROR", summary: `Error uploading file: ${error.err}`, duration: 5000, position: 'topCenter' });
       console.log('Error uploading file: ', error);
     }
   };
@@ -66,9 +67,7 @@ export class CreatePageComponent implements OnInit {
     if (!input.files?.length) {
       return;
     }
-    console.log('input: ', input.files[0]);
 
     this.selectedFile = input.files[0];
-    console.log('this.selectedFile: ', this.selectedFile);
   };
 }

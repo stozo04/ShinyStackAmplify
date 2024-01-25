@@ -5,12 +5,14 @@
       <div class="col-sm-6">
         <div class="page-title">
           <h2>{{ title }}</h2>
+          <button class="btn btn-sm btn-outline" style="margin-left: 1rem" *ngIf="showCreateButton" (click)="navigateToCreate()">Create</button>
         </div>
       </div>
       <div class="col-sm-6" *ngIf="breadcrumb">
         <nav aria-label="breadcrumb" class="theme-breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="breadcrumbRoute">{{ breadcrumb }}</a></li>
+            
           </ol>
         </nav>
       </div>

@@ -12,13 +12,11 @@ import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { PagesComponent } from './pages/pages.component';
 import { Amplify } from 'aws-amplify';
 import { generateClient } from 'aws-amplify/api';
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 import awsconfig from '../aws-exports';
 import { HomeComponent } from './home/home.component';
-import { CollectionComponent } from './home/widgets/collection/collection.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './home/logout/logout.component';
 import { NgToastModule } from 'ng-angular-popup'
@@ -35,9 +33,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    PagesComponent,
     HomeComponent,
-    CollectionComponent,
     LoginComponent,
     LogoutComponent
   ],

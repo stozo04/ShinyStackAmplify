@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Product } from '../classes/product';
 import { generateClient } from 'aws-amplify/api';
-import { getUrl } from 'aws-amplify/storage';
+import { getUrl, list } from 'aws-amplify/storage';
 import { listProducts, getProduct } from '../../../graphql/queries';
 import { updateProduct, deleteProduct, createProduct } from '../../../graphql/mutations';
 import { NgToastService } from 'ng-angular-popup';
@@ -118,20 +118,18 @@ export class ProductService {
   }
 
   //GET ALL IMAGES
-  // try {
-  //   const response = await list({
-  //     prefix: '',
-  //     options: {
-  //       listAll: true
-  //     }
-  //   });
-  //   console.log('files: ', response)
+  public async getAllImages(): Promise<void> {
+    try {
+      const response = await list({
+        prefix: '',
+        options: {
+          listAll: true
+        }
+      });
+      console.log('files: ', response)
 
-  //   response.items.forEach(async image => {
-  //     //const url = await getUrl({ key: image.key });
-  //     console.log('image: ', image)
-  //   });
-  // } catch (error) {
-  //   console.log('Error ', error);
-  // }
+    } catch (error) {
+      console.log('Error ', error);
+    }
+  }
 }

@@ -24,7 +24,6 @@ export class AuthService {
   public user: BehaviorSubject<AuthState> = new BehaviorSubject(null);
 
   constructor() {
-    console.log('config: ', amplifyconfig)
     Amplify.configure(amplifyconfig);
 
     // AWS Cognito synchronization

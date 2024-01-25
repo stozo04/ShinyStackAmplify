@@ -14,16 +14,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 
 // Components
-import { MenuComponent } from './components/menu/menu.component';
-import { SettingsComponent } from './components/settings/settings.component';
-import { CategoriesComponent } from './components/categories/categories.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
-
-// Skeleton Loader Components
-import { SkeletonProductBoxComponent } from './components/skeleton/skeleton-product-box/skeleton-product-box.component';
-
-// Layout Box
-import { LayoutBoxComponent } from './components/layout-box/layout-box.component';
 
 // Tap To Top
 import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component';
@@ -34,12 +25,7 @@ import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component'
   declarations: [
     HeaderComponent,
     FooterComponent,
-    MenuComponent,
-    SettingsComponent,
     BreadcrumbComponent,
-    CategoriesComponent,
-    SkeletonProductBoxComponent,
-    LayoutBoxComponent,
     TapToTopComponent,
   ],
   imports: [
@@ -67,9 +53,6 @@ import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component'
     HeaderComponent,
     FooterComponent,
     BreadcrumbComponent,
-    CategoriesComponent,
-    SkeletonProductBoxComponent,
-    LayoutBoxComponent,
     TapToTopComponent,
   ]
 })

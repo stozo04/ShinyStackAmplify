@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Product } from '../shared/classes/product';
 import { ProductService } from '../shared/services/product.service';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -9,15 +8,12 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrl: './home.component.scss'
 })
 
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent {
   public themeLogo: string = 'assets/images/icon/logo-14.png'; // Change Logo
   public products: Product[] = [];
   public productCollections: any[] = [];
-  public active;
 
-  constructor(private _sanitizer: DomSanitizer, public productService: ProductService) {
-
-  }
+  constructor(public productService: ProductService) { }
 
 
   // Collection
@@ -38,16 +34,4 @@ export class HomeComponent implements OnInit, OnDestroy {
     title: 'Supplies',
     url: '/products/supplies'
   }]
-
-
-  async ngOnInit(): Promise<void> {
-    // Change color for this layout
-    document.documentElement.style.setProperty('--theme-deafult', '#e4604a');
-  }
-
-  ngOnDestroy(): void {
-    // Remove Color
-    document.documentElement.style.removeProperty('--theme-deafult');
-  }
-
 }

@@ -1,7 +1,7 @@
 <!-- header -->
 <app-header [themeLogo]="themeLogo"></app-header>
 
-<app-breadcrumb title="Silver Collection" breadcrumb="Home"></app-breadcrumb>
+<app-breadcrumb  [title]="breadcrumbTitle"></app-breadcrumb>
 <!--section start-->
 <section class="collection section-b-space">
     <div class="container">
@@ -12,7 +12,7 @@
                     <div class="collection-content">
                         <h3>coins</h3>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                        <a routerLink="../coins" class="btn btn-outline">View</a>
+                        <a routerLink="../coins/list" class="btn btn-outline">View</a>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                     <div class="collection-content">
                         <h3>rounds</h3>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                        <a routerLink="../rounds" class="btn btn-outline">View</a>
+                        <a routerLink="../rounds/list" class="btn btn-outline">View</a>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                     <div class="collection-content">
                         <h3>junk</h3>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry....</p>
-                        <a routerLink="../junk" class="btn btn-outline">View</a>
+                        <a routerLink="../junk/list" class="btn btn-outline">View</a>
                     </div>
                 </div>
             </div>

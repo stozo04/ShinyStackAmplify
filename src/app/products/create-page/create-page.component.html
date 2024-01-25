@@ -35,7 +35,7 @@
               <input type="text" class="form-control" formControlName="mintMark">
             </div>
             <div class="col-md-6">
-              <label for="quantity">Quantity</label>
+              <label for="quantity">Quantity *</label>
               <input type="number" class="form-control" formControlName="quantity">
             </div>
             <div class="col-md-6">
@@ -51,7 +51,7 @@
               <textarea class="form-control" formControlName="description"></textarea>
             </div>
             <div class="col-md-12">
-              <button class="btn btn-sm btn-solid" (click)="addCoin()">Add</button>
+              <button class="btn btn-sm btn-solid" [disabled]="!createCoinForm.valid" (click)="addCoin()">Add</button>
             </div>
           </div>
         </form>

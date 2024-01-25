@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { TypeSelectionPageComponent } from './type-selection-page.component';
+import { FormatSelectionPageComponent } from './format-selection-page.component';
 
 describe('TypeSelectionPageComponent', () => {
-  let component: TypeSelectionPageComponent;
-  let fixture: ComponentFixture<TypeSelectionPageComponent>;
+  let component: FormatSelectionPageComponent;
+  let fixture: ComponentFixture<FormatSelectionPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TypeSelectionPageComponent]
+      imports: [FormatSelectionPageComponent]
     })
-    .compileComponents();
-    
-    fixture = TestBed.createComponent(TypeSelectionPageComponent);
+      .compileComponents();
+
+    fixture = TestBed.createComponent(FormatSelectionPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

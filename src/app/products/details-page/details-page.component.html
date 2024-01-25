@@ -1,85 +1,86 @@
 <!-- header -->
 <app-header [themeLogo]="themeLogo"></app-header>
-<app-breadcrumb [title]="breadCrumbTitle" [breadcrumb]="breadCrumbPath"></app-breadcrumb>
+<app-breadcrumb [title]="breadcrumbTitle" [breadcrumb]="breadcrumb" [breadcrumbRoute]="breadcrumbRoute"></app-breadcrumb>
 <!-- section start -->
 <ng-container *ngIf="product$ | async as product; else loading">
-
-<section class="contact-page register-page section-b-space">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <h3>Details</h3>
-        <form class="theme-form" [formGroup]="editCoinForm">
-          <div class="row">
-            <div class="col-md-6">
-              <label for="name">Name *</label>
-              <input type="text" class="form-control" formControlName="name" required="">
+  <section class="contact-page register-page section-b-space">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>Details</h3>
+          <form class="theme-form" [formGroup]="editCoinForm">
+            <div class="row">
+              <div class="col-md-6">
+                <label for="name">Name *</label>
+                <input type="text" class="form-control" formControlName="name" required="">
+              </div>
+              <div class="col-md-6 select_input">
+                <label for="type">Bullion Type *</label>
+                <select class="form-control" formControlName="bullionType">
+                  <option *ngFor="let type of bullionOptions" [value]="type">{{ type }}</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="review">PCGS Link</label>
+                <input type="url" class="form-control" formControlName="pcgsURL">
+              </div>
+              <div class="col-md-6 select_input">
+                <label for="type">Format *</label>
+                <select class="form-control" formControlName="type">
+                  <option *ngFor="let type of typeOptions" [value]="type">{{ type }}</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="mintMark">Mint Mark</label>
+                <input type="text" class="form-control" formControlName="mintMark">
+              </div>
+              <div class="col-md-6">
+                <label for="quantity">Quantity *</label>
+                <input type="number" class="form-control" formControlName="quantity">
+              </div>
+              <div class="col-md-6">
+                <label for="purchasePrice">Purchase Price</label>
+                <input type="text" class="form-control" formControlName="purchasePrice">
+              </div>
+              <div class="col-md-6">
+                <label for="weight">Weight *</label>
+                <input type="text" class="form-control" formControlName="weight">
+              </div>
+              <div class="col-md-12">
+                <label for="email">Description *</label>
+                <textarea class="form-control" formControlName="description"></textarea>
+              </div>
+              <div class="col-md-12">
+                <button class="btn btn-sm btn-outline" style="margin-right: 1rem" (click)="deleteCoin()">Delete</button>
+                <button class="btn btn-sm btn-solid" [disabled]="!editCoinForm.valid"
+                  (click)="updateChanges()">Save</button>
+              </div>
             </div>
-            <div class="col-md-6 select_input">
-              <label for="type">Bullion Type *</label>
-              <select class="form-control" formControlName="bullionType">
-                <option *ngFor="let type of bullionOptions" [value]="type">{{ type }}</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label for="review">PCGS Link</label>
-              <input type="url" class="form-control" formControlName="pcgsURL">
-            </div>
-            <div class="col-md-6 select_input">
-              <label for="type">Format *</label>
-              <select class="form-control" formControlName="type">
-                <option *ngFor="let type of typeOptions" [value]="type">{{ type }}</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label for="mintMark">Mint Mark</label>
-              <input type="text" class="form-control" formControlName="mintMark">
-            </div>
-            <div class="col-md-6">
-              <label for="quantity">Quantity</label>
-              <input type="number" class="form-control" formControlName="quantity">
-            </div>
-            <div class="col-md-6">
-              <label for="purchasePrice">Purchase Price</label>
-              <input type="text" class="form-control" formControlName="purchasePrice">
-            </div>
-            <div class="col-md-6">
-              <label for="weight">Weight *</label>
-              <input type="text" class="form-control" formControlName="weight">
-            </div>
-            <div class="col-md-12">
-              <label for="email">Description *</label>
-              <textarea class="form-control" formControlName="description"></textarea>
-            </div>
-            <div class="col-md-12">
-              <button class="btn btn-sm btn-outline" style="margin-right: 1rem" (click)="deleteCoin()">Delete</button>
-              <button class="btn btn-sm btn-solid" (click)="updateChanges()">Save</button>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section> 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-      <input type="file" id="imageUpload" name="imageUpload" accept="image/png, image/jpeg, image/jpg" (change)="imageSelected($event)" />
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <input type="file" id="imageUpload" name="imageUpload" accept="image/png, image/jpeg, image/jpg"
+            (change)="imageSelected($event)" />
+        </div>
+        <div class="col-md-6">
+          <button class="btn btn-sm btn-solid" (click)="uploadImage()">
+            Upload
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="col-md-6">
-      <button  class="btn btn-sm btn-solid" (click)="uploadImage()">
-        Upload
-      </button>
-    </div>
-    </div>
-  </div>
-</section>
+  </section>
 </ng-container>
 
 <ng-template #loading>
-    <p>LOADING</p>
+  <p>LOADING</p>
 </ng-template>
 <!-- Section ends -->
 

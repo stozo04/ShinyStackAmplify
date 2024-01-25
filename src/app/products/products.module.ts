@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ProductsRoutingModule } from './products-routing.module';
-import { SilverListPageComponent } from './silver-list-page/silver-list-page.component';
+import { ListPageComponent } from './list-page/list-page.component';
 import { SuppliesComponent } from './supplies/supplies.component';
-import { GoldListPageComponent } from './gold-list-page/gold-list-page.component';
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
 import { SharedModule } from '../shared/shared.module';
@@ -13,16 +12,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { CreatePageComponent } from './create-page/create-page.component';
 import { DetailsPageComponent } from './details-page/details-page.component';
-import { TypeSelectionPageComponent } from './type-selection-page/type-selection-page.component';
+import { FormatSelectionPageComponent } from './format-selection-page/format-selection-page.component';
 
 @NgModule({
   declarations: [
-    SilverListPageComponent,
-    GoldListPageComponent,
+    ListPageComponent,
     SuppliesComponent,
     CreatePageComponent,
     DetailsPageComponent,
-    TypeSelectionPageComponent
+    FormatSelectionPageComponent
   ],
   imports: [
     FontAwesomeModule,

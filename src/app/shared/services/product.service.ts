@@ -23,12 +23,7 @@ export class ProductService {
           input: product
         }
       });
-      console.log(result.errors[0])
-      if (result.errors[0] !== undefined) {
-        console.log(result.errors[0])
-        this.toast.error({ detail: "ERROR", summary: `Error saving data: ${result.errors[0].message}`, duration: 5000, position: 'topCenter' });
-        return of(null);
-      }
+
       return of(result);
     }
     catch (error) {

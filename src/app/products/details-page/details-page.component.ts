@@ -20,8 +20,9 @@ export class DetailsPageComponent implements OnInit {
   bullionOptions = Object.values(BullionType);
   selectedFile: File | undefined = undefined;
   editCoinForm: UntypedFormGroup;
-  breadCrumbTitle: string;
-  breadCrumbPath: string;
+  breadcrumb: string;
+  breadcrumbRoute: string;
+  breadcrumbTitle: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,8 +36,9 @@ export class DetailsPageComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.route.paramMap.subscribe((params) => {
       this.productId = params.get('id');
-      this.breadCrumbTitle = params.get('type') + " Collection";
-      this.breadCrumbPath = params.get('format');
+      this.breadcrumbTitle = params.get('type') + " Collection";
+      this.breadcrumb = `${params.get('format')}`;
+      this.breadcrumbRoute = `/products/${params.get('type')}/${params.get('format')}/list`;
     });
 
     this.editCoinForm = this.formBuilder.group({

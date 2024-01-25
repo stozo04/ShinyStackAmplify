@@ -12,7 +12,7 @@ export const createProduct = /* GraphQL */ `
       description
       imageKey
       pcgsURL
-      type
+      format
       bullionType
       mintMark
       quantity
@@ -35,7 +35,7 @@ export const updateProduct = /* GraphQL */ `
       description
       imageKey
       pcgsURL
-      type
+      format
       bullionType
       mintMark
       quantity
@@ -58,7 +58,7 @@ export const deleteProduct = /* GraphQL */ `
       description
       imageKey
       pcgsURL
-      type
+      format
       bullionType
       mintMark
       quantity

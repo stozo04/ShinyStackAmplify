@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { uploadData } from 'aws-amplify/storage';
-import { Type, BullionType } from '../../shared/classes/product';
+import { Format, BullionType } from '../../shared/classes/product';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgToastService } from 'ng-angular-popup';
 import { ProductService } from 'src/app/shared/services/product.service';
@@ -13,7 +13,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
 export class CreatePageComponent implements OnInit {
   public themeLogo: string = 'assets/images/icon/logo-14.png'; // TODO: Change Logo
   selectedFile: File | undefined = undefined;
-  typeOptions = Object.values(Type);
+  formatOptions = Object.values(Format);
   bullionOptions = Object.values(BullionType);
   createCoinForm: UntypedFormGroup;
 
@@ -29,7 +29,7 @@ export class CreatePageComponent implements OnInit {
       description: ['', Validators.required],
       imageKey: [''],
       pcgsURL: [''],
-      type: ['', Validators.required],
+      format: ['', Validators.required],
       bullionType: ['', Validators.required],
       mintMark: [''],
       quantity: ['', Validators.required],

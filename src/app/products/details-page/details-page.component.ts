@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Product, Type, BullionType } from '../../shared/classes/product';
+import { Product, Format, BullionType } from '../../shared/classes/product';
 import { Observable } from 'rxjs';
 import { uploadData } from 'aws-amplify/storage';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
@@ -16,7 +16,7 @@ export class DetailsPageComponent implements OnInit {
   public themeLogo: string = '../../assets/images/icon/logo-14.png'; // Change Logo
   product$: Observable<Product>;
   productId: string;
-  typeOptions = Object.values(Type);
+  formatOptions = Object.values(Format);
   bullionOptions = Object.values(BullionType);
   selectedFile: File | undefined = undefined;
   editCoinForm: UntypedFormGroup;
@@ -47,7 +47,7 @@ export class DetailsPageComponent implements OnInit {
       description: ['', Validators.required],
       imageKey: [''],
       pcgsURL: [''],
-      type: ['', Validators.required],
+      format: ['', Validators.required],
       bullionType: ['', Validators.required],
       mintMark: [''],
       quantity: ['', Validators.required],

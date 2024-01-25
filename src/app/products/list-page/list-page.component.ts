@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from '../../shared/classes/product';
+import { BullionType, Product } from '../../shared/classes/product';
 import { Observable } from 'rxjs';
 import { ProductService } from 'src/app/shared/services/product.service';
 
@@ -16,6 +16,8 @@ export class ListPageComponent implements OnInit {
   breadcrumb: string;
   breadcrumbRoute: string;
   breadcrumbTitle: string;
+  bullionType: string;
+  format: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,12 +26,14 @@ export class ListPageComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.route.paramMap.subscribe((params) => {
+      this.bullionType = params.get('type').toUpperCase();
+      this.format = params.get('format').toUpperCase();
       this.breadcrumbTitle = params.get('type') + " Collection";
       this.breadcrumb = 'Format';
       this.breadcrumbRoute = `/products/${params.get('type')}/format`;
     });
 
-    this.products$ = await this.productService.getProducts(true);
+    this.products$ = await this.productService.getProducts(true, this.bullionType, this.format);
   }
 }
 

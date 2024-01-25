@@ -7,7 +7,7 @@ export interface NewProduct {
     description: string;
     imageKey?: string;
     pcgsURL?: string;
-    type: Type;
+    format: Format;
     bullionType: BullionType;
     mintMark?: string;
     quantity: number;
@@ -16,7 +16,7 @@ export interface NewProduct {
     signedURL?: string; // NOTE: This is auto-genreated
 }
 
-export enum Type {
+export enum Format {
     COIN = 'COIN',
     BAR = 'BAR',
     ROUND = 'ROUND',

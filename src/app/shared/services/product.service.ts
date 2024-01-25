@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { Product } from '../classes/product';
 import { generateClient } from 'aws-amplify/api';
 import { getUrl } from 'aws-amplify/storage';
-import { listProducts } from '../../../graphql/queries';
+import { listProducts, getProduct } from '../../../graphql/queries';
 import { updateProduct, deleteProduct, createProduct } from '../../../graphql/mutations';
 import { NgToastService } from 'ng-angular-popup';
 
@@ -34,18 +34,15 @@ export class ProductService {
 
   public async getProduct(id: string, withImage: boolean): Promise<Observable<Product>> {
     try {
-      const result = await this.client.graphql({ query: listProducts, variables: { id: id } });
-      console.log('result: ', result)
+      const result = await this.client.graphql({ query: getProduct, variables: { id: id } });
       if (withImage) {
         // Get Presigned URL
-        result.data.listProducts.items.forEach(async item => {
-          if (item.imageKey !== null) {
-            const signedURL = await getUrl({ key: item.imageKey });
-            item.presignedURL = signedURL.url;
-          }
-        });
+        if (result.data.getProduct.imageKey !== null) {
+          const signedURL = await getUrl({ key: result.data.getProduct.imageKey });
+          result.data.getProduct.presignedURL = signedURL.url;
+        }
       }
-      return of(result.data.listProducts.items[0]);
+      return of(result.data.getProduct);
     }
     catch (error) {
       this.toast.error({ detail: "ERROR", summary: `Error loading data: ${error.err}`, duration: 5000, position: 'topCenter' });
@@ -53,9 +50,20 @@ export class ProductService {
     }
   }
 
-  public async getProducts(withImage: boolean): Promise<Observable<Product[]>> {
+  public async getProducts(withImage: boolean, bullionType: string, format: string): Promise<Observable<Product[]>> {
     try {
-      const result = await this.client.graphql({ query: listProducts });
+      // listBlog(filter: { name: { eq: "My New Blog!" } })
+      const result = await this.client.graphql(
+        {
+          query: listProducts,
+          variables: {
+            filter:
+            {
+              bullionType: { eq: bullionType },
+              format: { eq: format }
+            }
+          }
+        });
       if (withImage) {
         // Get Presigned URL
         result.data.listProducts.items.forEach(async item => {

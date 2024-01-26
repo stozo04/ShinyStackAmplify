@@ -3,11 +3,6 @@
 
 <!-- section start -->
 <section class="contact-page register-page section-b-space">
-  <div *ngIf="isLoading" class="text-center">
-    <div class="spinner-border" role="status" style="color: #ff4c3b;">
-      <span class="visually-hidden" >Loading...</span>
-    </div>
-  </div>
   <div class="container">
     <div class="card">
       <h4 class="card-header">Add New Coin</h4>
@@ -65,16 +60,10 @@
               <div class="col-md-12 ">&nbsp;</div>
               <hr />
               <div class="col-md-6">
-
                   <input type="file" class="form-control" id="customFile" accept="image/png, image/jpeg, image/jpg" (change)="imageSelected($event)" />
                   <button  [disabled]="!selectedFile" class="btn btn-sm btn-solid" (click)="uploadImage()">
                     Upload
                   </button>
-                <!-- <label for="customFile">Upload</label>
-                <input type="file" class="form-control" id="customFile" accept="image/png, image/jpeg, image/jpg" (change)="imageSelected($event)" />
-                <button  [disabled]="!selectedFile" class="btn btn-sm btn-solid" (click)="uploadImage()">
-                  Upload
-                </button> -->
               </div>
             </div>
           </form>

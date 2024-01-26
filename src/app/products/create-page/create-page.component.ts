@@ -17,7 +17,6 @@ export class CreatePageComponent implements OnInit {
   formatOptions = Object.values(Format);
   bullionOptions = Object.values(BullionType);
   createCoinForm: UntypedFormGroup;
-  isLoading: boolean;
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -42,8 +41,7 @@ export class CreatePageComponent implements OnInit {
   }
 
   public async addCoin(): Promise<void> {
-    this.isLoading = true;
-    (await this.productService.createProduct(this.createCoinForm.value)).subscribe(x => console.log('here: ', x));
+    await this.productService.createProduct(this.createCoinForm.value);
     this.toast.success({ detail: "SUCCESS", summary: `Changes have been saved`, duration: 5000, position: 'topCenter' });
   }
 

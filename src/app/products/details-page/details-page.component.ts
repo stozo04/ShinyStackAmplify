@@ -70,7 +70,7 @@ export class DetailsPageComponent implements OnInit {
 
   public async deleteCoin(): Promise<void> {
     this.product$ = await this.productService.deleteProduct(this.productId);
-    this.toast.success({ detail: "SUCCESS", summary: `Changes have been saved`, duration: 5000, position: 'topCenter' });
+    this.toast.success({ detail: "SUCCESS", summary: `Coin was deleted`, duration: 5000, position: 'topCenter' });
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 

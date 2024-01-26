@@ -68,9 +68,9 @@
               <hr />
               <div class="row">
                 <div class="col-md-12">
-                  <img src="{{product.presignedURL}}" *ngIf="product.presignedURL !== null" class="img-thumbnail">
+                  <img src="{{product.presignedURL}}" *ngIf="product.imageKey !== ''" class="img-thumbnail">
                 </div>
-                <div class="col-md-6" *ngIf="product.presignedURL === null">
+                <div class="col-md-6" *ngIf="product.imageKey === ''">
                   <input type="file" class="form-control" id="customFile" accept="image/png, image/jpeg, image/jpg"
                     (change)="imageSelected($event)" />
                   <button [disabled]="!selectedFile" class="btn btn-sm btn-solid" (click)="uploadImage()">

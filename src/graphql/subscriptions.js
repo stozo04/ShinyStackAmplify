@@ -15,6 +15,7 @@ export const onCreateProduct = /* GraphQL */ `
       quantity
       purchasePrice
       weight
+      percentage
       createdAt
       updatedAt
       __typename
@@ -35,6 +36,7 @@ export const onUpdateProduct = /* GraphQL */ `
       quantity
       purchasePrice
       weight
+      percentage
       createdAt
       updatedAt
       __typename
@@ -55,6 +57,7 @@ export const onDeleteProduct = /* GraphQL */ `
       quantity
       purchasePrice
       weight
+      percentage
       createdAt
       updatedAt
       __typename

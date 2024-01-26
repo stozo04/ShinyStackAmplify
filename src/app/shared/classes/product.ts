@@ -13,6 +13,7 @@ export interface NewProduct {
     quantity: number;
     purchasePrice?: number;
     weight: string;
+    percentage?: string;
     signedURL?: string; // NOTE: This is auto-genreated
 }
 
@@ -27,4 +28,5 @@ export enum BullionType {
     GOLD = 'GOLD',
     SILVER = 'SILVER',
     COPPER = 'COPPER',
+    NONBULLION = 'NONBULLION' // For US Coins that do not contain any precious metals
 }

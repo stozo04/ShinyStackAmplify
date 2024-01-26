@@ -15,6 +15,7 @@ export const getProduct = /* GraphQL */ `
       quantity
       purchasePrice
       weight
+      percentage
       createdAt
       updatedAt
       __typename
@@ -48,6 +49,7 @@ export const listProducts = /* GraphQL */ `
         quantity
         purchasePrice
         weight
+        percentage
         createdAt
         updatedAt
         __typename

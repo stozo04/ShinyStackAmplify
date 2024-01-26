@@ -30,6 +30,10 @@ export class HomeComponent {
     title: 'Copper',
     url: '/products/copper/format'
   }, {
+    image: 'assets/images/products/non-bullion/us_coins2.jpg',
+    title: 'Non Bullion',
+    url: '/products/NONBULLION/format'
+  }, {
     image: 'assets/images/products/supplies/supplies.jpg',
     title: 'Supplies',
     url: '/products/supplies'

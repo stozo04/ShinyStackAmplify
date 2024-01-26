@@ -15,6 +15,7 @@ type Product @model {
   quantity: Int!
   purchasePrice: String
   weight: String
+  percentage: String
 }
 
 enum Format {
@@ -28,4 +29,5 @@ enum BullionType {
   GOLD
   SILVER
   COPPER
+  NONBULLION
 }

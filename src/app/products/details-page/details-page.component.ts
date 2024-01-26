@@ -52,6 +52,7 @@ export class DetailsPageComponent implements OnInit {
       mintMark: [''],
       quantity: ['', Validators.required],
       purchasePrice: [''],
+      percentage: [''],
       weight: ['', Validators.required],
     });
 

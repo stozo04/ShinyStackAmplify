@@ -21,14 +21,6 @@ export type AmplifyDependentResourcesAttributes = {
     "productsStorage": {
       "BucketName": "string",
       "Region": "string"
-    },
-    "productsTable": {
-      "Arn": "string",
-      "Name": "string",
-      "PartitionKeyName": "string",
-      "PartitionKeyType": "string",
-      "Region": "string",
-      "StreamArn": "string"
     }
   }
 }

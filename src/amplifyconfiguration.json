@@ -28,12 +28,5 @@
     "EMAIL"
   ],
   "aws_user_files_s3_bucket": "myproducts110247-develop",
-  "aws_user_files_s3_bucket_region": "us-west-2",
-  "aws_dynamodb_all_tables_region": "us-west-2",
-  "aws_dynamodb_table_schemas": [
-    {
-      "tableName": "productsTable-develop",
-      "region": "us-west-2"
-    }
-  ]
+  "aws_user_files_s3_bucket_region": "us-west-2"
 }

@@ -22,8 +22,7 @@
         "shinystacks": {}
       },
       "storage": {
-        "productsStorage": {},
-        "productsTable": {}
+        "productsStorage": {}
       }
     }
   }

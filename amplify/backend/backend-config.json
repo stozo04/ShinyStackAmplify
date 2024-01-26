@@ -1,19 +1,5 @@
 {
   "api": {
-    "productsApi": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "productsLambda"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "API Gateway"
-    },
     "shinystacks": {
       "dependsOn": [],
       "output": {

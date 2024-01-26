@@ -1,12 +1,5 @@
 {
   "aws_project_region": "us-west-2",
-  "aws_cloud_logic_custom": [
-    {
-      "name": "productsApi",
-      "endpoint": "https://eecrtfimak.execute-api.us-west-2.amazonaws.com/develop",
-      "region": "us-west-2"
-    }
-  ],
   "aws_appsync_graphqlEndpoint": "https://2vqzwhquejg2vadw2ysltahn4i.appsync-api.us-west-2.amazonaws.com/graphql",
   "aws_appsync_region": "us-west-2",
   "aws_appsync_authenticationType": "API_KEY",

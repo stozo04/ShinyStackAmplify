@@ -23,7 +23,6 @@
         "productsTable": {}
       },
       "api": {
-        "productsApi": {},
         "shinystacks": {}
       },
       "storage": {

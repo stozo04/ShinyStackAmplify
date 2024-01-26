@@ -23,11 +23,19 @@ export const getProduct = /* GraphQL */ `
 `;
 export const listProducts = /* GraphQL */ `
   query ListProducts(
+    $id: ID
     $filter: ModelProductFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listProducts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listProducts(
+      id: $id
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
         id
         name

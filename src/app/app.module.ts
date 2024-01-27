@@ -13,7 +13,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { Amplify } from 'aws-amplify';
-import { generateClient } from 'aws-amplify/api';
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 import awsconfig from '../aws-exports';
 import { HomeComponent } from './home/home.component';
@@ -23,7 +22,6 @@ import { NgToastModule } from 'ng-angular-popup'
 
 
 Amplify.configure(awsconfig);
-const client = generateClient();
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {

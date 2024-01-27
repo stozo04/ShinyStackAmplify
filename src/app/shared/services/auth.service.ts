@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { getCurrentUser } from 'aws-amplify/auth';
-
 import { BehaviorSubject } from 'rxjs';
-import amplifyconfig from '../../../amplifyconfiguration.json';
-import { Amplify } from 'aws-amplify';
 
 
 export interface AuthState {
@@ -24,8 +21,6 @@ export class AuthService {
   public user: BehaviorSubject<AuthState> = new BehaviorSubject(null);
 
   constructor() {
-    Amplify.configure(amplifyconfig);
-
     // AWS Cognito synchronization
     const checkCurrentUser = async () => {
       try {

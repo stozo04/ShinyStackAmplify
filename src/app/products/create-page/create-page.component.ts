@@ -25,7 +25,7 @@ export class CreatePageComponent implements OnInit {
   ) { }
 
   async ngOnInit(): Promise<void> {
-
+    this.productService.getAllImages();
     this.createCoinForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -46,21 +46,12 @@ export class CreatePageComponent implements OnInit {
     this.toast.success({ detail: "SUCCESS", summary: `Changes have been saved`, duration: 5000, position: 'topCenter' });
   }
 
-  uploadImage = async () => {
+  public async uploadImage(): Promise<void> {
     if (!this.selectedFile) {
       return;
     }
-    try {
-      const result = uploadData({
-        key: uuidv4(),
-        data: this.selectedFile
-      }).result;
-      console.log('Succeeded: ', result);
-      this.toast.success({ detail: "SUCCESS", summary: `File Uploaded`, duration: 5000, position: 'topCenter' });
-    } catch (error) {
-      this.toast.error({ detail: "ERROR", summary: `Error uploading file: ${error.err}`, duration: 5000, position: 'topCenter' });
-      console.log('Error uploading file: ', error);
-    }
+
+    this.productService.uploadImage(this.selectedFile);
   };
 
   imageSelected = (e: Event) => {

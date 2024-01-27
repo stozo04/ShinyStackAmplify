@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Product } from '../classes/product';
 import { generateClient } from 'aws-amplify/api';
-import { getUrl, list } from 'aws-amplify/storage';
+import { getUrl, list, uploadData } from 'aws-amplify/storage';
 import { listProducts, getProduct } from '../../../graphql/queries';
 import { updateProduct, deleteProduct, createProduct } from '../../../graphql/mutations';
 import { NgToastService } from 'ng-angular-popup';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -130,6 +131,20 @@ export class ProductService {
 
     } catch (error) {
       console.log('Error ', error);
+    }
+  }
+
+  public async uploadImage(image): Promise<void> {
+    try {
+      const result = await uploadData({
+        key: uuidv4() + ".jpg",
+        data: image
+      }).result;
+      console.log('Succeeded: ', result);
+      this.toast.success({ detail: "SUCCESS", summary: `File Uploaded`, duration: 5000, position: 'topCenter' });
+    } catch (error) {
+      this.toast.error({ detail: "ERROR", summary: `Error uploading file: ${error.err}`, duration: 5000, position: 'topCenter' });
+      console.log('Error uploading file: ', error);
     }
   }
 }

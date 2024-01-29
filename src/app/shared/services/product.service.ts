@@ -74,6 +74,7 @@ export class ProductService {
           }
         });
       }
+      result.data.listProducts.items.sort((a, b) => a.year - b.year);
       return of(result.data.listProducts.items);
     }
     catch (error) {

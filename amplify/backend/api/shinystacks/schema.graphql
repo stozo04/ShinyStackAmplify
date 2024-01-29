@@ -16,6 +16,7 @@ type Product @model {
   purchasePrice: String
   weight: String
   percentage: String
+  year: String
 }
 
 enum Format {

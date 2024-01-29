@@ -53,6 +53,7 @@ export class DetailsPageComponent implements OnInit {
       quantity: ['', Validators.required],
       purchasePrice: [''],
       percentage: [''],
+      year: [''],
       weight: ['', Validators.required],
     });
 

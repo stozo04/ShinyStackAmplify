@@ -14,6 +14,7 @@ export interface NewProduct {
     purchasePrice?: number;
     weight: string;
     percentage?: string;
+    year?: string;
     signedURL?: string; // NOTE: This is auto-genreated
 }
 

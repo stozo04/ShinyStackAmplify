@@ -19,6 +19,7 @@ export const createProduct = /* GraphQL */ `
       purchasePrice
       weight
       percentage
+      year
       createdAt
       updatedAt
       __typename
@@ -43,6 +44,7 @@ export const updateProduct = /* GraphQL */ `
       purchasePrice
       weight
       percentage
+      year
       createdAt
       updatedAt
       __typename
@@ -67,6 +69,7 @@ export const deleteProduct = /* GraphQL */ `
       purchasePrice
       weight
       percentage
+      year
       createdAt
       updatedAt
       __typename

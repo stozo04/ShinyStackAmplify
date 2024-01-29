@@ -37,6 +37,7 @@ export class CreatePageComponent implements OnInit {
       quantity: ['', Validators.required],
       purchasePrice: [''],
       percentage: [''],
+      year: [''],
       weight: ['', Validators.required],
     });
   }

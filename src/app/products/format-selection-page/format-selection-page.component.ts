@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './format-selection-page.component.scss'
 })
 export class FormatSelectionPageComponent implements OnInit {
-  public themeLogo: string = 'assets/images/icon/logo-14.png'; // Change Logo
   breadcrumbTitle: string;
   coinURL: string;
   barURL: string;

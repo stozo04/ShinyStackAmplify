@@ -12,7 +12,6 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrl: './create-page.component.scss'
 })
 export class CreatePageComponent implements OnInit {
-  public themeLogo: string = 'assets/images/icon/logo-14.png'; // TODO: Change Logo
   selectedFile: File | undefined = undefined;
   formatOptions = Object.values(Format);
   bullionOptions = Object.values(BullionType);

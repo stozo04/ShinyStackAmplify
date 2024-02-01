@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './logout.component.html',
   styleUrl: './logout.component.scss'
 })
-export class LogoutComponent {
-  public themeLogo: string = 'assets/images/icon/logo-14.png'; // TODO: Change Logo
-}
+export class LogoutComponent { }

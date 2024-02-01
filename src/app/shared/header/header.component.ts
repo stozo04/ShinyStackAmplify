@@ -9,7 +9,6 @@ import { AuthService } from '../services/auth.service';
 export class HeaderComponent implements OnInit {
 
   @Input() class: string;
-  @Input() themeLogo: string = 'assets/images/icon/logo.png'; // Default Logo
   @Input() topbar: boolean = true; // Default True
   @Input() sticky: boolean = false; // Default false
 

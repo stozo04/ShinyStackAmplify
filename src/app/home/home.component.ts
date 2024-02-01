@@ -9,7 +9,6 @@ import { ProductService } from '../shared/services/product.service';
 })
 
 export class HomeComponent {
-  public themeLogo: string = 'assets/images/icon/logo-14.png'; // Change Logo
   public products: Product[] = [];
   public productCollections: any[] = [];
 

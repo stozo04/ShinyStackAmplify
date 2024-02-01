@@ -13,7 +13,6 @@ import { ProductService } from 'src/app/shared/services/product.service';
   styleUrl: './details-page.component.scss'
 })
 export class DetailsPageComponent implements OnInit {
-  public themeLogo: string = '../../assets/images/icon/logo-14.png'; // Change Logo
   product$: Observable<Product>;
   productId: string;
   formatOptions = Object.values(Format);

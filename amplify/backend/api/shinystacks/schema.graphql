@@ -30,5 +30,5 @@ enum BullionType {
   GOLD
   SILVER
   COPPER
-  NONBULLION
+  CLAD
 }

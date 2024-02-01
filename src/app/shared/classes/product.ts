@@ -29,5 +29,5 @@ export enum BullionType {
     GOLD = 'GOLD',
     SILVER = 'SILVER',
     COPPER = 'COPPER',
-    NONBULLION = 'NONBULLION' // For US Coins that do not contain any precious metals
+    CLAD = 'CLAD' // For US Coins that do not contain any precious metals
 }

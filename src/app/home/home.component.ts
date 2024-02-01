@@ -29,9 +29,9 @@ export class HomeComponent {
     title: 'Copper',
     url: '/products/copper/format'
   }, {
-    image: 'assets/images/products/non-bullion/us_coins2.jpg',
-    title: 'Non Bullion',
-    url: '/products/NONBULLION/format'
+    image: 'assets/images/products/non-bullion/clad.jpg',
+    title: 'Clad',
+    url: '/products/CLAD/format'
   }, {
     image: 'assets/images/products/supplies/supplies.jpg',
     title: 'Supplies',

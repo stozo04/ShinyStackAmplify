@@ -4,9 +4,35 @@
 <ng-container *ngIf="products$ | async as products; else loading">
   <section class="section-b-space blog-detail-page review-page">
     <div class="container">
+
+
+      <div class="row" >
+        <div class="col-md-3" >
+          <label>Filter By Denomination</label>
+          <select class="form-control" (change)="filterByDenomination($event.target.value)">
+            <option value="ALL">All</option>
+            <option value="DOLLAR">Dollar</option>
+            <option value="HALFDOLLAR">Half Dollar</option>
+            <option value="QUARTER">Quarter</option>
+            <option value="DIME">Dime</option>
+          </select>
+        </div>
+        <div class="col-md-3" >
+          <label>Filter By Year</label>
+          <select  class="form-control" (change)="filterByYear($event.target.value)" >
+            <option *ngFor="let type of availableYears" [value]="type">{{ type }}</option>
+          </select>
+        </div>
+      </div>
+
+<hr />
+
+
+
+      
       <div class="row">
         <div class="col-sm-12">
-          <ul class="comment-section">
+          <ul class="comment-section" >
             <div *ngFor="let product of products">
               <li>
                 <div class="media">

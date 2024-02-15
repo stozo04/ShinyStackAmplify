@@ -19,9 +19,25 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './home/logout/logout.component';
 import { NgToastModule } from 'ng-angular-popup'
+import { fetchAuthSession } from 'aws-amplify/auth';
 
 
 Amplify.configure(awsconfig);
+// Amplify.configure(awsconfig, {
+//   ssr: true,
+//   API: {
+//     GraphQL: {
+//       headers: async () => {
+//         const idToken = (await fetchAuthSession()).tokens?.idToken?.toString();
+//         console.log('idToken: ', idToken)
+//         if (!idToken) return {};
+//         return {
+//           Authorization: idToken,
+//         };
+//       },
+//     },
+//   },
+// });
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {

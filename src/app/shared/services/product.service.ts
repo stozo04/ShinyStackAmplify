@@ -135,7 +135,7 @@ export class ProductService {
     }
   }
 
-  public async uploadImage(image): Promise<void> {
+  public async uploadImage(image): Promise<Observable<string>> {
     try {
       const result = await uploadData({
         key: uuidv4() + ".jpg",
@@ -143,6 +143,7 @@ export class ProductService {
       }).result;
       console.log('Succeeded: ', result);
       this.toast.success({ detail: "SUCCESS", summary: `File Uploaded`, duration: 5000, position: 'topCenter' });
+      return of(result.key);
     } catch (error) {
       this.toast.error({ detail: "ERROR", summary: `Error uploading file: ${error.err}`, duration: 5000, position: 'topCenter' });
       console.log('Error uploading file: ', error);

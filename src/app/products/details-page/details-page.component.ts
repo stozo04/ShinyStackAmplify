@@ -40,6 +40,11 @@ export class DetailsPageComponent implements OnInit {
       this.breadcrumbRoute = `/products/${params.get('type')}/${params.get('format')}/list`;
     });
 
+    this.initializeForm();
+    this.loadCoinDetails();
+  }
+
+  private initializeForm(): void {
     this.editCoinForm = this.formBuilder.group({
       id: ['', Validators.required],
       name: ['', Validators.required],
@@ -55,8 +60,6 @@ export class DetailsPageComponent implements OnInit {
       year: [''],
       weight: ['', Validators.required],
     });
-
-    this.loadCoinDetails();
   }
 
   private async loadCoinDetails(): Promise<void> {
@@ -67,6 +70,8 @@ export class DetailsPageComponent implements OnInit {
   public async updateChanges(): Promise<void> {
     this.product$ = await this.productService.updateProduct(this.editCoinForm.value);
     this.toast.success({ detail: "SUCCESS", summary: `Changes have been saved`, duration: 5000, position: 'topCenter' });
+    this.initializeForm();
+    this.loadCoinDetails();
   }
 
   public async deleteCoin(): Promise<void> {

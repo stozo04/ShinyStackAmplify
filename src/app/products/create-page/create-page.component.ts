@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { uploadData } from 'aws-amplify/storage';
 import { Format, BullionType } from '../../shared/classes/product';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgToastService } from 'ng-angular-popup';
 import { ProductService } from 'src/app/shared/services/product.service';
-import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-create-page',
@@ -25,25 +23,57 @@ export class CreatePageComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.productService.getAllImages();
+    this.initializeForm();
+  }
+
+  private initializeForm(): void {
     this.createCoinForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
       imageKey: [''],
       pcgsURL: [''],
-      format: ['', Validators.required],
-      bullionType: ['', Validators.required],
+      format: [Format.COIN, Validators.required],
+      bullionType: [BullionType.SILVER, Validators.required],
       mintMark: [''],
-      quantity: ['', Validators.required],
+      quantity: [1, Validators.required],
       purchasePrice: [''],
       percentage: [''],
       year: [''],
       weight: ['', Validators.required],
     });
+
+    this.createCoinForm.get('name')?.valueChanges.subscribe(value => {
+      const { year, mintMark } = this.parseName(value);
+      if (year) {
+        this.createCoinForm.get('year')?.setValue(year, { emitEvent: false });
+      }
+      if (mintMark) {
+        this.createCoinForm.get('mintMark')?.setValue(mintMark, { emitEvent: false });
+      }
+    });
+  }
+
+  private parseName(name: string): { year: string | null, mintMark: string | null } {
+    const yearMatch = name.match(/\b(19|20)\d{2}\b/);
+    const mintMarkMatch = name.match(/\(([A-Z])\)/);
+    return {
+      year: yearMatch ? yearMatch[0] : null,
+      mintMark: mintMarkMatch ? mintMarkMatch[1] : null
+    };
   }
 
   public async addCoin(): Promise<void> {
     await this.productService.createProduct(this.createCoinForm.value);
     this.toast.success({ detail: "SUCCESS", summary: `Changes have been saved`, duration: 5000, position: 'topCenter' });
+    this.createCoinForm.reset();
+    this.initializeForm();
+    // Resetting the input field after successful upload
+    const inputElement = document.getElementById('customFile') as HTMLInputElement;
+    if (inputElement) {
+      inputElement.value = ''; // This clears the selected file from the input
+    }
+
+    this.selectedFile = null; // Resetting the selectedFile property
   }
 
   public async uploadImage(): Promise<void> {
@@ -51,7 +81,9 @@ export class CreatePageComponent implements OnInit {
       return;
     }
 
-    this.productService.uploadImage(this.selectedFile);
+    (await this.productService.uploadImage(this.selectedFile)).subscribe((imageKey: string) => {
+      this.createCoinForm.get("imageKey").setValue(imageKey);
+    });
   };
 
   imageSelected = (e: Event) => {

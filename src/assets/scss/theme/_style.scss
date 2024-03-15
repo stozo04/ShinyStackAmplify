@@ -244,7 +244,7 @@ button:focus {
     &:not(:focus-visible) {
         outline: 0;
     }
-} 
+}
 
 .accordion-button {
     &:not(.collapsed)  {
@@ -488,6 +488,7 @@ del {
 
 .sticky {
     &.fixed {
+      max-height: 9rem;
         position: fixed;
         width: 100%;
         top: 0;
@@ -1542,7 +1543,7 @@ header {
     ==========================*/
 
 .home-slider,
-.center-slider { 
+.center-slider {
     .layout-7 {
         .home {
             height: 60vh;
@@ -1561,7 +1562,7 @@ header {
         display: flex !important;
         align-items: center;
         justify-content: center;
-        background: rgba(white, 0.5) !important; 
+        background: rgba(white, 0.5) !important;
         i {
             font-size: 8px;
             color: #000;
@@ -14351,10 +14352,10 @@ div#loading-bar {
 .sidenav nav {
     overflow-y: auto;
 }
-    
+
 .sidebar-unset {
   overflow-y: unset !important;
-}  
+}
 
 
 /* modal animation */
@@ -14385,11 +14386,11 @@ div#loading-bar {
         z-index: 999;
         width: 100vw;
         height: 100%;
-    
+
         lightbox {
             width: 100%;
             max-width: 100%;
-            max-height: 100%;  
+            max-height: 100%;
         }
     }
 }

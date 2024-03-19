@@ -81,8 +81,9 @@ export class CreatePageComponent implements OnInit {
       return;
     }
 
-    (await this.productService.uploadImage(this.selectedFile)).subscribe((imageKey: string) => {
-      this.createCoinForm.get("imageKey").setValue(imageKey);
+    (await this.productService.uploadImage(this.selectedFile)).subscribe({
+      next: (imageKey: string) => { this.createCoinForm.get("imageKey").setValue(imageKey); },
+      error: () => { this.toast.error({ detail: "Error", summary: `Error adding image`, duration: 5000, position: 'topCenter' }); }
     });
   };
 

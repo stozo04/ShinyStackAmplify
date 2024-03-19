@@ -80,21 +80,15 @@ export class DetailsPageComponent implements OnInit {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 
-  uploadImage = async () => {
+  public async uploadImage(): Promise<void> {
     if (!this.selectedFile) {
       return;
     }
-    try {
-      const result = uploadData({
-        key: this.selectedFile.name,
-        data: this.selectedFile
-      }).result;
-      console.log('Succeeded: ', result);
-      this.toast.success({ detail: "SUCCESS", summary: `File Uploaded`, duration: 5000, position: 'topCenter' });
-    } catch (error) {
-      this.toast.error({ detail: "ERROR", summary: `Error uploading file: ${error.err}`, duration: 5000, position: 'topCenter' });
-      console.log('Error uploading file: ', error);
-    }
+
+    (await this.productService.uploadImage(this.selectedFile)).subscribe({
+      next: (imageKey: string) => { this.editCoinForm.get("imageKey").setValue(imageKey); },
+      error: () => { this.toast.error({ detail: "Error", summary: `Error adding image`, duration: 5000, position: 'topCenter' }); }
+    });
   };
 
   imageSelected = (e: Event) => {
@@ -103,9 +97,6 @@ export class DetailsPageComponent implements OnInit {
     if (!input.files?.length) {
       return;
     }
-    console.log('input: ', input.files[0]);
-
     this.selectedFile = input.files[0];
-    console.log('this.selectedFile: ', this.selectedFile);
   };
 }

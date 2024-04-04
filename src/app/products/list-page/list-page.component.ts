@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../shared/classes/product';
-import { Observable, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
@@ -34,13 +34,17 @@ export class ListPageComponent implements OnInit {
       this.breadcrumbRoute = `/products/${params.get('type')}/format`;
     });
 
-    this.products$ = await this.productService.getProducts(true, this.bullionType, this.format);
-    this.products$.subscribe(p => {
-      this.availableYears = p.map(i => i.year);
+    //this.products$ = await this.productService.getProducts(true, this.bullionType, this.format);
+    this.products$ = await this.productService.getAllProducts();
+    this.products$ = this.products$.pipe(
+      map(products => products.filter(x => x.bullionType === this.bullionType && x.format === this.format))
+    );
+    this.products$.subscribe((products: Product[]) => {
+      console.log('count: ', products.length)
+      this.availableYears = products.map(i => i.year);
       this.availableYears = this.availableYears.filter((item, i, ar) => ar.indexOf(item) === i);
       this.availableYears.unshift('All');
-    }
-    )
+    })
   }
 
   public async filterByDenomination(denomination: string): Promise<void> {

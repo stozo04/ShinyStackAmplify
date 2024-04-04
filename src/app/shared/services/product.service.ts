@@ -51,6 +51,32 @@ export class ProductService {
     }
   }
 
+  public async getAllProducts(): Promise<Observable<Product[]>> {
+    try {
+      // listBlog(filter: { name: { eq: "My New Blog!" } })
+      const result = await this.client.graphql(
+        {
+          query: listProducts,
+          variables: {
+            limit: 1000
+          }
+        });
+      // Get Presigned URL
+      result.data.listProducts.items.forEach(async item => {
+        if (item.imageKey !== null) {
+          const signedURL = await getUrl({ key: item.imageKey });
+          item.presignedURL = signedURL.url;
+        }
+      });
+      result.data.listProducts.items.sort((a, b) => a.year - b.year);
+      return of(result.data.listProducts.items);
+    }
+    catch (error) {
+      this.toast.error({ detail: "ERROR", summary: `Error loading data: ${error.err}`, duration: 5000, position: 'topCenter' });
+      console.log('getProducts call failed: ', error);
+    }
+  }
+
   public async getProducts(withImage: boolean, bullionType: string, format: string): Promise<Observable<Product[]>> {
     try {
       // listBlog(filter: { name: { eq: "My New Blog!" } })

@@ -20,6 +20,7 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './home/logout/logout.component';
 import { NgToastModule } from 'ng-angular-popup'
 import { fetchAuthSession } from 'aws-amplify/auth';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 Amplify.configure(awsconfig);
@@ -49,7 +50,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     HomeComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    DashboardComponent
   ],
   imports: [
     NgToastModule,

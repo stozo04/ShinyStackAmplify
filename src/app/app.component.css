@@ -1,9 +1,9 @@
 .album-image {
-    width: 100%;
-    margin: 8px;
-  }
+  width: 100%;
+  margin: 8px;
+}
 
-  .remove-image-button {
-    border: 0px;
-    background: transparent;
-  }
+.remove-image-button {
+  border: 0px;
+  background: transparent;
+}

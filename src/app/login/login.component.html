@@ -7,6 +7,8 @@
         let-signOut="signOut"
     >
         <h1>Welcome {{ user.username }}!</h1>
+        <button class="btn btn-solid"  (click)="navigateToDashboard()" >View Dashboard</button>
+        <br />
         <button (click)="signOut()">Sign Out</button>
     </ng-template>
 </amplify-authenticator>

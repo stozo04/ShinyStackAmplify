@@ -1,0 +1,59 @@
+<!-- header -->
+<app-header></app-header>
+<section *ngIf="userIsLoggedIn">
+  <ng-container *ngIf="products$ | async as products; else loading">
+    <section class="section-b-space">
+      <div class="container">
+          <div class="row gx-3">
+              <div class="col">
+                <div class="card shadow p-3 mb-5 bg-white rounded">
+                  <div class="card-body">
+                    <h4 class="card-title">SILVER</h4>
+                    <p class="card-text">
+                      Total Purchase Price: {{ totalSILVERPurchase | currency}} <br />
+                      Total Ounces: TODO <br />
+                      Number Of Coins: {{ totalSILVERPieces }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card shadow p-3 mb-5 bg-white rounded">
+                  <div class="card-body">
+                    <h4 class="card-title">COPPER</h4>
+                    <p class="card-text">
+                      Total Purchase Price: {{ totalCOPPERPurchase | currency }} <br />
+                      Total Ounces: TODO <br />
+                      Number Of Coins: {{ totalCOPPERPieces }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card shadow p-3 mb-5 bg-white rounded">
+                  <div class="card-body">
+                    <h4 class="card-title">CLAD</h4>
+                    <p class="card-text">
+                      Total Purchase Price: {{ totalCLADPurchase | currency}} <br />
+                      Total Ounces: TODO <br />
+                      Number Of Coins: {{ totalCLADPieces }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  </ng-container>
+</section>
+<ng-template #loading>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="spinner-border" role="status" style="color: #ff4c3b;">
+        <span class="visually-hidden" >Loading...</span>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!-- footer -->
+<app-footer-one></app-footer-one>

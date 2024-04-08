@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Product } from '../shared/classes/product';
 import { ProductService } from '../shared/services/product.service';
 

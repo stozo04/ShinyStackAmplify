@@ -2,8 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../shared/classes/product';
-import { Observable, map, of } from 'rxjs';
+import { BehaviorSubject, Observable, map, of } from 'rxjs';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-list-page',
@@ -11,7 +12,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
   styleUrl: './list-page.component.scss'
 })
 export class ListPageComponent implements OnInit {
-  products$: Observable<Product[]>;
+  products$ = new BehaviorSubject<Product[]>(null);
   public url: any;
   breadcrumb: string;
   breadcrumbRoute: string;
@@ -22,61 +23,77 @@ export class ListPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private toast: NgToastService
   ) { }
 
-  async ngOnInit(): Promise<void> {
-    this.route.paramMap.subscribe((params) => {
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
       this.bullionType = params.get('type').toUpperCase();
       this.format = params.get('format').toUpperCase();
-      this.breadcrumbTitle = params.get('type') + " Collection";
+      this.breadcrumbTitle = `${params.get('type')} Collection`;
       this.breadcrumb = 'Format';
       this.breadcrumbRoute = `/products/${params.get('type')}/format`;
-    });
 
-    //this.products$ = await this.productService.getProducts(true, this.bullionType, this.format);
-    this.products$ = await this.productService.getAllProducts();
-    this.products$ = this.products$.pipe(
-      map(products => products.filter(x => x.bullionType === this.bullionType && x.format === this.format))
-    );
-    this.products$.subscribe((products: Product[]) => {
-      console.log('count: ', products.length)
-      this.availableYears = products.map(i => i.year);
-      this.availableYears = this.availableYears.filter((item, i, ar) => ar.indexOf(item) === i);
-      this.availableYears.unshift('All');
-    })
+      // Fetch products after setting parameters to ensure they are available
+      this.fetchProducts();
+    });
   }
 
-  public async filterByDenomination(denomination: string): Promise<void> {
-    if (denomination === 'ALL') {
-      this.products$ = await this.productService.getProducts(true, this.bullionType, this.format);
-    } else {
-      this.products$.subscribe(p => {
-        const results = [];
-        p.forEach(e => {
-          if (e.name.toUpperCase().includes(denomination)) {
-            results.push(e);
-          }
-        });
-        this.products$ = of(results);
-      })
+  async fetchProducts(): Promise<void> {
+    try {
+      const allProducts = await this.productService.getAllProducts(true, true);
+      this.products$.next(allProducts.filter(x => x.bullionType === this.bullionType && x.format === this.format));
+
+      // Log the count of filtered products
+      console.log('count: ', this.products$.value.length);
+
+      // Deduplicate and set available years
+      const years = this.products$.value.map(product => product.year);
+      this.availableYears = Array.from(new Set(years));
+      this.availableYears.unshift('All');
+    } catch (error) {
+      console.error('Failed to fetch products:', error);
+      this.toast.error({
+        detail: "ERROR",
+        summary: `Error loading data: ${error.message || error.err || 'Unknown Error'}`,
+        duration: 5000,
+        position: 'topCenter',
+      });
     }
+  }
+
+
+  public async filterByDenomination(denomination: string): Promise<void> {
+    // if (denomination === 'ALL') {
+    //   this.products$ = await this.productService.getProducts(true, this.bullionType, this.format);
+    // } else {
+    //   this.products$.subscribe(p => {
+    //     const results = [];
+    //     p.forEach(e => {
+    //       if (e.name.toUpperCase().includes(denomination)) {
+    //         results.push(e);
+    //       }
+    //     });
+    //     this.products$ = of(results);
+    //   })
+    // }
   }
 
   public async filterByYear(year: string): Promise<void> {
-    if (year.toUpperCase() === 'ALL') {
-      this.products$ = await this.productService.getProducts(true, this.bullionType, this.format);
-    } else {
-      this.products$.subscribe(p => {
-        const results = [];
-        p.forEach(e => {
-          if (e.year.toUpperCase().includes(year)) {
-            results.push(e);
-          }
-        });
-        this.products$ = of(results);
-      })
-    }
+    // if (year.toUpperCase() === 'ALL') {
+    //   this.products$ = await this.productService.getProducts(true, this.bullionType, this.format);
+    // } else {
+    //   this.products$.subscribe(p => {
+    //     const results = [];
+    //     p.forEach(e => {
+    //       if (e.year.toUpperCase().includes(year)) {
+    //         results.push(e);
+    //       }
+    //     });
+    //     this.products$ = of(results);
+    //   })
+    // }
   }
 }
 

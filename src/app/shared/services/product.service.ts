@@ -51,29 +51,57 @@ export class ProductService {
     }
   }
 
-  public async getAllProducts(): Promise<Observable<Product[]>> {
+  /**
+   * Fetches all products with optional enhancements.
+   *
+   * This method retrieves all products up to a limit of 1000. It can optionally
+   * fetch presigned URLs for product images if `withImage` is true and sort the products
+   * by their `year` if `sorted` is true.
+   *
+   * @param {boolean} withImage - If true, fetches presigned URLs for product images.
+   * @param {boolean} sorted - If true, sorts the products by their `year`.
+   * @returns {Promise<Product[]>} A promise that resolves to an array of products,
+   * possibly with presigned URLs and sorted by year. In case of error, resolves to an empty array.
+   * @throws {Error} Throws an error if the fetching process fails.
+   */
+  public async getAllProducts(withImage: boolean, sorted: boolean): Promise<Product[]> {
     try {
-      // listBlog(filter: { name: { eq: "My New Blog!" } })
-      const result = await this.client.graphql(
-        {
-          query: listProducts,
-          variables: {
-            limit: 1000
-          }
-        });
-      // Get Presigned URL
-      result.data.listProducts.items.forEach(async item => {
-        if (item.imageKey !== null) {
-          const signedURL = await getUrl({ key: item.imageKey });
-          item.presignedURL = signedURL.url;
-        }
+      const result = await this.client.graphql({
+        query: listProducts,
+        variables: { limit: 1000 },
       });
-      result.data.listProducts.items.sort((a, b) => a.year - b.year);
-      return of(result.data.listProducts.items);
-    }
-    catch (error) {
-      this.toast.error({ detail: "ERROR", summary: `Error loading data: ${error.err}`, duration: 5000, position: 'topCenter' });
-      console.log('getProducts call failed: ', error);
+
+      let items = result.data.listProducts.items;
+
+      // Only fetch presigned URLs if withImage is true
+      if (withImage) {
+        // Use Promise.all to wait for all getUrl promises to resolve
+        items = await Promise.all(
+          items.map(async (item) => {
+            if (item.imageKey) {
+              const signedURL = await getUrl({ key: item.imageKey });
+              return { ...item, presignedURL: signedURL.url }; // Append presignedURL to the item
+            }
+            return item;
+          })
+        );
+      }
+
+      // Sort items by year if sorted is true
+      if (sorted) {
+        items.sort((a, b) => a.year - b.year);
+      }
+
+      return items;
+    } catch (error) {
+      console.error('getProducts call failed: ', error);
+      this.toast.error({
+        detail: "ERROR",
+        summary: `Error loading data: ${error.message || error.err || 'Unknown Error'}`,
+        duration: 5000,
+        position: 'topCenter',
+      });
+      return []; // Return an empty array in case of error
     }
   }
 

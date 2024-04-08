@@ -3,6 +3,7 @@ import { Format, BullionType } from '../../shared/classes/product';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgToastService } from 'ng-angular-popup';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-create-page',
@@ -10,6 +11,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
   styleUrl: './create-page.component.scss'
 })
 export class CreatePageComponent implements OnInit {
+  userIsLoggedIn: boolean;
   selectedFile: File | undefined = undefined;
   formatOptions = Object.values(Format);
   bullionOptions = Object.values(BullionType);
@@ -18,12 +20,22 @@ export class CreatePageComponent implements OnInit {
   constructor(
     private formBuilder: UntypedFormBuilder,
     private toast: NgToastService,
-    private productService: ProductService
+    private productService: ProductService,
+    private auth: AuthService
   ) { }
 
+  /**
+   * Initializes the component by checking user login status and initialize form.
+   */
   async ngOnInit(): Promise<void> {
-    this.productService.getAllImages();
-    this.initializeForm();
+    this.userIsLoggedIn = this.auth.isUserLoggedIn();
+    if (!this.userIsLoggedIn) {
+      this.toast.error({ detail: "ERROR", summary: "Permission Denied", duration: 5000, position: 'topCenter' });
+      return;
+    } else {
+
+      this.initializeForm();
+    }
   }
 
   private initializeForm(): void {

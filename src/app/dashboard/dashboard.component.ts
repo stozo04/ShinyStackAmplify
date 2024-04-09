@@ -19,10 +19,13 @@ export class DashboardComponent implements OnInit {
   // Initializing totals to zero to ensure defined values.
   totalSILVERPurchase = 0;
   totalSILVERPieces = 0;
+  totalSILVERWeight = 0;
   totalCOPPERPurchase = 0;
   totalCOPPERPieces = 0;
+  totalCOPPERWeight = 0;
   totalCLADPurchase = 0;
   totalCLADPieces = 0;
+  totalCLADWeight = 0;
 
   constructor(
     private auth: AuthService,
@@ -47,7 +50,6 @@ export class DashboardComponent implements OnInit {
    */
   private async fetchAndProcessProducts(): Promise<void> {
     const allProducts = await this.productService.getAllProducts(false, false);
-    console.log('allProducts: ', allProducts)
     this.processProducts(allProducts);
     this.products$.next(allProducts);
   }
@@ -61,11 +63,40 @@ export class DashboardComponent implements OnInit {
     ['SILVER', 'COPPER', 'CLAD'].forEach(type => {
       const filteredProducts = products.filter(p => p.bullionType === type);
       const totalPurchase = filteredProducts.reduce((acc, curr) => acc + curr.purchasePrice * curr.quantity, 0);
-      const totalPieces = filteredProducts.length;
+      const totalPieces = filteredProducts.reduce((sum, product) => sum + product.quantity, 0);
+      const totalWeight = this.sumWeightsInTroyOunces(filteredProducts);
 
       // Dynamically updating properties based on bullion type
       this[`total${type}Purchase`] = totalPurchase;
       this[`total${type}Pieces`] = totalPieces;
+      this[`total${type}Weight`] = totalWeight;
     });
   }
+
+  // Function to parse the weight and its unit from a string
+  private parseWeight(weightStr: string): { value: number, unit: string } {
+    const weightParts = weightStr.match(/(\d+(\.\d+)?)\s*(Grams|Troy Ounce)/i);
+    if (!weightParts) {
+      throw new Error(`Invalid weight format: ${weightStr}`);
+    }
+    //console.log('weightParts: ', weightParts)
+    return { value: parseFloat(weightParts[1]), unit: weightParts[3].toLowerCase() };
+  }
+
+  // Function to convert Grams to Troy Ounces
+  private gramsToTroyOunces(grams: number): number {
+    // There are approximately 31.1035 grams in a Troy Ounce
+    return grams / 31.1035;
+  }
+
+  // Function to sum up weights in Troy Ounces
+  private sumWeightsInTroyOunces(products: { weight: string, quantity: number }[]): number {
+    return products.reduce((total, product) => {
+      const { value, unit } = this.parseWeight(product.weight);
+      const quantity = product.quantity;
+      let troyOunces = unit === 'grams' ? this.gramsToTroyOunces(value) : value;
+      return total + (troyOunces * quantity);
+    }, 0);
+  }
+
 }

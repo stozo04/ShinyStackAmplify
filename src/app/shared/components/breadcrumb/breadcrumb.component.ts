@@ -20,4 +20,8 @@ export class BreadcrumbComponent implements OnInit {
   public navigateToCreate(): void {
     this.router.navigate(['/products/create']);
   }
+
+  public navigateToDashboard(): void {
+    this.router.navigate(['/dashboard']);
+  }
 }

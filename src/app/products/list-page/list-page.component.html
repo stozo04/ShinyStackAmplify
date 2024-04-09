@@ -1,5 +1,5 @@
 <app-header [sticky]="false" *ngIf="url != '/pages/comingsoon'"></app-header>
-<app-breadcrumb [title]="breadcrumbTitle" [breadcrumb]="breadcrumb" [breadcrumbRoute]="breadcrumbRoute"></app-breadcrumb>
+<app-breadcrumb [title]="breadcrumbTitle" [breadcrumb]="breadcrumb" [breadcrumbRoute]="breadcrumbRoute" [showCreateButton]="true"></app-breadcrumb>
 <!-- section start -->
 <ng-container *ngIf="products$ | async as products; else loading">
   <section class="section-b-space blog-detail-page review-page">

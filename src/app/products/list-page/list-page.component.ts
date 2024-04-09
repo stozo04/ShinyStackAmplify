@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../shared/classes/product';
-import { BehaviorSubject, Observable, map, of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { NgToastService } from 'ng-angular-popup';
 
@@ -13,6 +13,7 @@ import { NgToastService } from 'ng-angular-popup';
 })
 export class ListPageComponent implements OnInit {
   products$ = new BehaviorSubject<Product[]>(null);
+  productsClone$ = new BehaviorSubject<Product[]>(null); // This is used to store clone of products. When user filters we can use this to set back to orignal state
   public url: any;
   breadcrumb: string;
   breadcrumbRoute: string;
@@ -42,9 +43,9 @@ export class ListPageComponent implements OnInit {
 
   async fetchProducts(): Promise<void> {
     try {
-      const allProducts = await this.productService.getAllProducts(true, true);
+      const allProducts = await this.productService.getAllProducts(false, false);
       this.products$.next(allProducts.filter(x => x.bullionType === this.bullionType && x.format === this.format));
-
+      this.productsClone$.next(this.products$.value);
       // Log the count of filtered products
       console.log('count: ', this.products$.value.length);
 
@@ -64,36 +65,23 @@ export class ListPageComponent implements OnInit {
   }
 
 
-  public async filterByDenomination(denomination: string): Promise<void> {
-    // if (denomination === 'ALL') {
-    //   this.products$ = await this.productService.getProducts(true, this.bullionType, this.format);
-    // } else {
-    //   this.products$.subscribe(p => {
-    //     const results = [];
-    //     p.forEach(e => {
-    //       if (e.name.toUpperCase().includes(denomination)) {
-    //         results.push(e);
-    //       }
-    //     });
-    //     this.products$ = of(results);
-    //   })
-    // }
+  public filterByDenomination(denomination: string): void {
+    if (denomination === 'ALL') {
+      this.products$.next(this.productsClone$.value);
+    } else {
+      const filteredProducts = this.productsClone$.value.filter((product: Product) => product.name.toUpperCase().includes(denomination));
+      this.products$.next(filteredProducts);
+    }
+
   }
 
   public async filterByYear(year: string): Promise<void> {
-    // if (year.toUpperCase() === 'ALL') {
-    //   this.products$ = await this.productService.getProducts(true, this.bullionType, this.format);
-    // } else {
-    //   this.products$.subscribe(p => {
-    //     const results = [];
-    //     p.forEach(e => {
-    //       if (e.year.toUpperCase().includes(year)) {
-    //         results.push(e);
-    //       }
-    //     });
-    //     this.products$ = of(results);
-    //   })
-    // }
+    if (year.toUpperCase() === 'ALL') {
+      this.products$.next(this.productsClone$.value);
+    } else {
+      const filteredProducts = this.productsClone$.value.filter((product: Product) => product.year.toUpperCase().includes(year));
+      this.products$.next(filteredProducts);
+    }
   }
 }
 

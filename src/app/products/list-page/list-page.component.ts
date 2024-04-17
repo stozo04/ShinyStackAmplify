@@ -43,8 +43,9 @@ export class ListPageComponent implements OnInit {
 
   async fetchProducts(): Promise<void> {
     try {
-      const allProducts = await this.productService.getAllProducts(true, true);
-      this.products$.next(allProducts.filter(x => x.bullionType === this.bullionType && x.format === this.format));
+      // const allProducts = await this.productService.getAllProducts(true, true);
+      const allProducts = await this.productService.filterProducts(true, this.bullionType, this.format);
+      this.products$.next(allProducts);
       this.productsClone$.next(this.products$.value);
       // Deduplicate and set available years
       const years = this.products$.value.map(product => product.year);

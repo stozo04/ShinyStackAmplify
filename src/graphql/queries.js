@@ -61,3 +61,26 @@ export const listProducts = /* GraphQL */ `
     }
   }
 `;
+
+export const filterProductsByFormatAndType = /* GraphQL */ `
+query MyQuery {
+  listProducts(filter: {format: {eq: COIN}, bullionType: {eq: SILVER}}) {
+    items {
+      bullionType
+      description
+      format
+      id
+      imageKey
+      mintMark
+      name
+      pcgsURL
+      percentage
+      purchasePrice
+      quantity
+      updatedAt
+      weight
+      year
+    }
+  }
+}
+`;

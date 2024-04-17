@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { getCurrentUser } from 'aws-amplify/auth';
+import { NgToastService } from 'ng-angular-popup';
 import { BehaviorSubject } from 'rxjs';
 
 
@@ -20,7 +21,7 @@ export interface AuthState {
 export class AuthService {
   public user: BehaviorSubject<AuthState> = new BehaviorSubject(null);
 
-  constructor() {
+  constructor(private toast: NgToastService) {
     // AWS Cognito synchronization
     const checkCurrentUser = async () => {
       try {
@@ -35,7 +36,12 @@ export class AuthService {
           });
         }
       } catch (error) {
-        console.log('Error getting current authenticated user:', error);
+        this.toast.error({
+          detail: "ERROR",
+          summary: `Error getting current authenticated user:: ${error.message || error.err || 'Unknown Error'}`,
+          duration: 5000,
+          position: 'topCenter',
+        });
         if (this.user.value && this.user.value.isLoggedIn) {
           alert("Error Authenticating User. Loggin User Out.")
           this.setUser({

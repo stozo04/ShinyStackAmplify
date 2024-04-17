@@ -105,7 +105,7 @@ export class ProductService {
     }
   }
 
-  public async getProducts(withImage: boolean, bullionType: string, format: string): Promise<Observable<Product[]>> {
+  public async filterProducts(withImage: boolean, bullionType: string, format: string): Promise<Product[]> {
     try {
       // listBlog(filter: { name: { eq: "My New Blog!" } })
       const result = await this.client.graphql(
@@ -116,7 +116,8 @@ export class ProductService {
             {
               bullionType: { eq: bullionType },
               format: { eq: format }
-            }
+            },
+            limit: 1000
           }
         });
       if (withImage) {
@@ -129,7 +130,7 @@ export class ProductService {
         });
       }
       result.data.listProducts.items.sort((a, b) => a.year - b.year);
-      return of(result.data.listProducts.items);
+      return result.data.listProducts.items;
     }
     catch (error) {
       this.toast.error({ detail: "ERROR", summary: `Error loading data: ${error.err}`, duration: 5000, position: 'topCenter' });

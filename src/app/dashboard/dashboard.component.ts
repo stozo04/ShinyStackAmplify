@@ -5,6 +5,7 @@ import { BehaviorSubject, catchError, filter, from, map, of, reduce, pipe } from
 import { Product } from '../shared/classes/product';
 import e from 'cors';
 import { ProductService } from '../shared/services/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,6 @@ import { ProductService } from '../shared/services/product.service';
 })
 
 export class DashboardComponent implements OnInit {
-  userIsLoggedIn: boolean;
   products$ = new BehaviorSubject<Product[]>(null);
 
   // Initializing totals to zero to ensure defined values.
@@ -30,19 +30,19 @@ export class DashboardComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private toast: NgToastService,
-    private productService: ProductService
+    private productService: ProductService,
+    private router: Router
   ) { }
 
   /**
    * Initializes the component by checking user login status and fetching products.
    */
   async ngOnInit(): Promise<void> {
-    this.userIsLoggedIn = this.auth.isUserLoggedIn();
-    if (!this.userIsLoggedIn) {
+    if (!this.auth.isUserAuthenticated()) {
       this.toast.error({ detail: "ERROR", summary: "Permission Denied", duration: 5000, position: 'topCenter' });
-      return;
+      this.router.navigate(['/login']);
     }
-    this.fetchAndProcessProducts();
+    await this.fetchAndProcessProducts();
   }
 
   /**

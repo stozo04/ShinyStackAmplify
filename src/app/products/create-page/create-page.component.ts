@@ -4,6 +4,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { NgToastService } from 'ng-angular-popup';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-page',
@@ -11,7 +12,6 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrl: './create-page.component.scss'
 })
 export class CreatePageComponent implements OnInit {
-  userIsLoggedIn: boolean;
   selectedFile: File | undefined = undefined;
   formatOptions = Object.values(Format);
   bullionOptions = Object.values(BullionType);
@@ -21,21 +21,21 @@ export class CreatePageComponent implements OnInit {
     private formBuilder: UntypedFormBuilder,
     private toast: NgToastService,
     private productService: ProductService,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) { }
 
   /**
    * Initializes the component by checking user login status and initialize form.
    */
   async ngOnInit(): Promise<void> {
-    this.userIsLoggedIn = this.auth.isUserLoggedIn();
-    if (!this.userIsLoggedIn) {
+    if (!this.auth.isUserAuthenticated()) {
       this.toast.error({ detail: "ERROR", summary: "Permission Denied", duration: 5000, position: 'topCenter' });
-      return;
-    } else {
-
-      this.initializeForm();
+      this.router.navigate(['../login']);
     }
+    console.log('initializeForm')
+    this.initializeForm();
+
   }
 
   private initializeForm(): void {

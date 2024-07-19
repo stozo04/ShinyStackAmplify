@@ -1,6 +1,6 @@
 <!-- header -->
 <app-header></app-header>
-<section *ngIf="userIsLoggedIn">
+<section>
   <ng-container *ngIf="products$ | async as products; else loading">
     <section class="section-b-space">
       <div class="container">

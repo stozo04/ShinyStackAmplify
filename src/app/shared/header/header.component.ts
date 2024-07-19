@@ -16,9 +16,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(public auth: AuthService) { }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   // @HostListener Decorator
   @HostListener("window:scroll", [])

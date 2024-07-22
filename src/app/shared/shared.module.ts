@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { BarRatingModule } from "ngx-bar-rating";
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
@@ -32,7 +31,6 @@ import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component'
     FormsModule,
     ReactiveFormsModule,
     CarouselModule,
-    BarRatingModule,
     LazyLoadImageModule,
     NgxSkeletonLoaderModule,
   ],
@@ -41,7 +39,6 @@ import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component'
     FormsModule,
     ReactiveFormsModule,
     CarouselModule,
-    BarRatingModule,
     LazyLoadImageModule,
     NgxSkeletonLoaderModule,
     HeaderComponent,

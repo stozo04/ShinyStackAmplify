@@ -77,7 +77,7 @@ export class DashboardComponent implements OnInit {
   private parseWeight(weightStr: string): { value: number, unit: string } {
     const weightParts = weightStr.match(/(\d+(\.\d+)?)\s*(Grams|Troy Ounce)/i);
     if (!weightParts) {
-      throw new Error(`Invalid weight format: ${weightStr}`);
+      this.toast.error({ detail: "ERROR", summary: `Invalid weight format: ${weightStr}`, duration: 5000, position: 'topCenter' });
     }
     //console.log('weightParts: ', weightParts)
     return { value: parseFloat(weightParts[1]), unit: weightParts[3].toLowerCase() };

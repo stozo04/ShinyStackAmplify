@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 // Header and Footer Components
 import { HeaderComponent } from './header/header.component';
@@ -32,7 +31,6 @@ import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component'
     ReactiveFormsModule,
     CarouselModule,
     LazyLoadImageModule,
-    NgxSkeletonLoaderModule,
   ],
   exports: [
     CommonModule,
@@ -40,7 +38,6 @@ import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component'
     ReactiveFormsModule,
     CarouselModule,
     LazyLoadImageModule,
-    NgxSkeletonLoaderModule,
     HeaderComponent,
     FooterComponent,
     BreadcrumbComponent,
